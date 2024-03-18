@@ -1,7 +1,11 @@
+import React from 'react';
+import GlobalStyle from './GlobalStyle';
+
 function App() {
   return (
     <div className="App">
-      <h1>CEOS 19기 프론트엔드 파이팅!( ¨̮ )و✧🔥</h1>
+      <GlobalStyle /> 
+
     </div>
   );
 }
