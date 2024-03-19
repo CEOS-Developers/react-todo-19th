@@ -12,7 +12,7 @@ const DateBar = () => {
   const week = ["일", "월", "화", "수", "목", "금", "토"];
   const dayOfWeek = week[today.getDay()]; // 현재 요일
 
-  // 한글 날짜 포맷으로 변환
+  // 한글로 변환!!
   const formattedDate = `${year}년 ${month}월 ${date}일 ${dayOfWeek}요일`;
 
   return <DateContainer>{formattedDate}</DateContainer>;
@@ -25,4 +25,5 @@ const DateContainer = styled.div`
   background-color: transeparent; 
   color: #333;
   font-size: 13px; 
+  margin-top: 5px;
 `;
