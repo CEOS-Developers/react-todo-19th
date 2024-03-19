@@ -8,6 +8,12 @@ License: none (public domain)
 
 const GlobalStyle = createGlobalStyle`
 
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -36,6 +42,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
  line-height: 1;
+ font-family: 'SUIT-Regular';
 }
 ol, ul {
  list-style: none;
