@@ -6,15 +6,28 @@ import AddButton from "../buttons/AddButton";
 import DoneButton from "../buttons/DoneButton";
 import TrashButton from "../buttons/TrashButton";
 import ResetButton from "../buttons/ResetButton";
+import TodoList from "../lists/TodoList";
 
 const MainPage = () => {
     const [inputValue, setInputValue] = useState(""); // 입력 값 추적
-    
+    const [thingsToDo, setThingsToDo] = useState([]);
+
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+          handleAddTodo();
+          e.preventDefault();
+        }
+      };
 
+    const handleAddTodo = () => {
+        if (!inputValue.trim()) return; // 빈 입력 방지
+        setThingsToDo([...thingsToDo, inputValue]);
+        setInputValue(''); // 입력 필드 초기화
+      };
 
 
 
@@ -39,16 +52,19 @@ const MainPage = () => {
                 value={inputValue} // 입력값 상태
                 onChange={handleInputChange}
                 hasContent={inputValue.length > 0} //입력값 있으면 prop 전달!!
+                onKeyDown={handleKeyDown} //엔터키로 버튼누르기
                 />
-                <AddButton/>
-            </InputContainer>
+                <AddButton onClick={handleAddTodo} />
+             </InputContainer>
+
             <ButtonContainer>
                 <TrashButton/>
                 <DoneButton/>
                 <ResetButton/>  
             </ButtonContainer>
+
             <ListContainer>
-                <TodoList/>
+                <TodoList items={thingsToDo}/>
                 <DoneList/>
             </ListContainer>
             <Footer>
@@ -74,7 +90,7 @@ justify-content: center;
 `;
 
 const ContentContaner = styled.body`
-width: 40%;
+width: 30%;
 min-width: 260px; //padding 계산해서 최소 너비 설정
 height: 60%;
 min-height: 420px;  //padding 계산해서 최소 높이 설정
@@ -139,11 +155,7 @@ const ButtonContainer = styled.div`
 
 
 const ListContainer = styled.div`
-
-`;
-
-const TodoList = styled.ul`
- 
+width: 80%;
 `;
 
 const DoneList = styled.ul`
