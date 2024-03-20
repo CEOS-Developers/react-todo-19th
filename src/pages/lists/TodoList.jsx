@@ -27,8 +27,8 @@ const TodoList = ({ items, selectedIds, onToggleSelect }) => {
 export default TodoList;
 
 const ListContainer = styled.ul`
-  width: 67%;
-  max-height: 350px;
+  width: 70%;
+  height: 60%;
   overflow-y: auto;
   list-style-type: none;
   padding: 0;
@@ -45,7 +45,6 @@ const ListItem = styled.div`
   flex: 1;
   padding: 8px;
   margin: 5px 0;
-  margin-right: 20px;
   background-color: ${({ isSelected, isCompleted }) =>
     isCompleted
       ? isSelected
@@ -57,6 +56,7 @@ const ListItem = styled.div`
   border-radius: 5px;
   font-size: 11px;
   cursor: pointer;
+  margin-right: 10px;
 `;
 
 const Priority = styled.span`

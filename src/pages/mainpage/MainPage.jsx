@@ -6,6 +6,7 @@ import DoneButton from "../buttons/DoneButton";
 import TrashButton from "../buttons/TrashButton";
 import ResetButton from "../buttons/ResetButton";
 import TodoList from "../lists/TodoList";
+import ProgressBar from "../progress/ProgressBar";
 
 const MainPage = () => {
     const [inputValue, setInputValue] = useState("");
@@ -14,6 +15,9 @@ const MainPage = () => {
     const [selectedIds, setSelectedIds] = useState([]);
     
     const handleInputChange = e => setInputValue(e.target.value);
+    const totalItems = items.length + completedItems.length;
+    const completedCount = completedItems.length;
+
 
     const handleAddTodo = () => {
         if (!inputValue.trim()) return;
@@ -66,10 +70,8 @@ const MainPage = () => {
         <PageContainer>
             <ContentContaner>
                 <Header>
-                    <TitleWrapper>
                         <Title>투두리스트</Title>
                         <ProgressStatusNumber/>
-                    </TitleWrapper>
                     <DateBar/>
                 </Header>
                 <InputContainer>
@@ -89,9 +91,9 @@ const MainPage = () => {
                     <ResetButton onClick={handleReset} />                 </ButtonContainer>
                 <TodoList items={displayItems} selectedIds={selectedIds} onToggleSelect={toggleSelectTodo} />
                 <Footer>
-                    <ProgressBar/>
+                <ProgressBar totalItems={totalItems} completedItems={completedCount} />            
                 </Footer>
-            </ContentContaner>
+                </ContentContaner>
         </PageContainer>
     )
 }
@@ -111,7 +113,7 @@ justify-content: center;
 overflow-y: auto;
 
 
-
+//스크롤바 커스텀
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -133,6 +135,7 @@ const ContentContaner = styled.body`
 width: 50%;
 min-width: 260px; //padding 계산해서 최소 너비 설정
 height: 60%;
+max-width: 500px;
 min-height: 420px;  //padding 계산해서 최소 높이 설정
 padding: 50px 20px 30px 20px;
 background-color: #fff;
@@ -144,10 +147,6 @@ align-items: center;
 `;
 const Header = styled.div`
  width: 70%
-`;
-
-const TitleWrapper = styled.div`
-  
 `;
 
 const Title = styled.h2`
@@ -176,7 +175,6 @@ color: ${props => props.hasContent ? '#4A90E2' : '#000'};
 font-family: 'SUIT-Regular';
 font-size: 12px;
 margin-right: 10px; 
-width: 80%;
 
 &:focus {
     outline: none; 
@@ -189,16 +187,12 @@ const ButtonContainer = styled.div`
   display: flex; 
   flex-direction: row; 
   justify-content: flex-end;  
-  width: 67%;
+  width: 70%;
   margin-top: 10px;
   margin-left:10px;
 `;
 
 
 const Footer = styled.div`
-  
-`;
-
-const ProgressBar = styled.div`
-
+  width: 70%;
 `;
