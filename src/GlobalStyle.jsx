@@ -134,11 +134,12 @@ table {
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: "UhBeepuding"; 
 }
 
 body{
-  font-family: "UhBeepuding"; 
-  min-height: 100vh;         
+  min-height: 100vh;   
+  background-color: #ffec9d;      
 }
 
 button {

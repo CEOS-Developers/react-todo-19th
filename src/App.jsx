@@ -1,5 +1,7 @@
+import Template from "./components/Template";
+
 function App() {
-  return <></>;
+  return <Template />;
 }
 
 export default App;
