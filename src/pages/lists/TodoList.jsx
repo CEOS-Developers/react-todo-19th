@@ -27,7 +27,7 @@ const ListContainer = styled.ul`
   width: 80%;
   max-height: 250px;
   overflow-y: auto; // 최대 높이 벗어나면 스크롤 생기게
-  list-style: none;
+  list-style: num;
   padding: 0;
   margin-top: 10px;
 `;
@@ -37,8 +37,10 @@ const ListItem = styled.li`
   padding: 8px;
   margin: 5px 0;
   background-color: ${({ isSelected, isCompleted }) => 
-    isCompleted ? '#79FF9F' : // 완료 배경색
-    isSelected ? '#d0e0f0' : '#f0f0f0'}; 
+    // 완료 + 선택 색상 처리
+    isCompleted ? (isSelected ? '#88CD9B': '#9AFFB6') : 
+    // 할일 + 선택 색상 처리
+    isSelected ? '#B9B9B9' : '#f0f0f0'}; 
   border-radius: 5px;
   font-size: 11px;
   cursor: pointer;

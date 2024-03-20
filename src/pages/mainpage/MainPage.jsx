@@ -17,17 +17,18 @@ const MainPage = () => {
 
     const handleAddTodo = () => {
         if (!inputValue.trim()) return;
-        const newTodo = { id: Date.now(), text: inputValue, isCompleted: false };
+        const newTodo = { id: Date.now(), text: inputValue, isCompleted: false, isSelected: false };
         setItems(prevItems => [...prevItems, newTodo]);
         setInputValue("");
     };
 
-    // 선택 핸드러
+    // 선택 핸들러
     const toggleSelectTodo = id => {
         setSelectedIds(prevSelectedIds =>
             prevSelectedIds.includes(id) ? prevSelectedIds.filter(sid => sid !== id) : [...prevSelectedIds, id]
         );
     };
+    
     // 완료 핸들러
     const handleCompleteTodo = () => {
         const updatedItems = items.filter(item => !selectedIds.includes(item.id));
@@ -38,6 +39,12 @@ const MainPage = () => {
         setSelectedIds([]);
     };
 
+    // 삭제 핸들러
+    const handleDeleteTodo = () => {
+        setItems(prev => prev.filter(item => !selectedIds.includes(item.id)));
+        setCompletedItems(prev => prev.filter(item => !selectedIds.includes(item.id)));
+        setSelectedIds([]);
+    };
 
     // 할일 목록이랑 완료 목록 합치기
     const displayItems = [...items, ...completedItems];
@@ -59,12 +66,13 @@ const MainPage = () => {
                     placeholder="오늘의 할일..." 
                     value={inputValue} // 입력값 상태
                     onChange={handleInputChange}
+                    hasContent={inputValue.length > 0} //입력값 있으면 prop 전달!!
                     onKeyDown={(e) => e.key === 'Enter' && handleAddTodo()} //엔터키로 버튼누르기
                     />
                     <AddButton onClick={handleAddTodo} />
                 </InputContainer>
                 <ButtonContainer>
-                    <TrashButton/>
+                    <TrashButton onClick={handleDeleteTodo}/>
                     <DoneButton onClick={handleCompleteTodo} />  
                     <ResetButton/>  
                 </ButtonContainer>
@@ -155,11 +163,6 @@ const ButtonContainer = styled.div`
   margin-left:10px;
 `;
 
-
-const ListContainer = styled.div`
-width: 80%;
-
-`;
 
 const Footer = styled.div`
   
