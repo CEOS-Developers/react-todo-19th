@@ -31,29 +31,35 @@ const Button = styled.button`
 `;
 
 function Section({ section }) {
-  const [todos, setTodos] = useState(section.todos);
-  const [todoText, setTodoText] = useState('');
-
-  const addTodo = () => {
-    setTodos([...todos, { id: todos.length + 1, text: todoText }]);
-    setTodoText('');
-  };
-
-  return (
-    <SectionContainer>
-      <h2>{section.name}</h2>
-      <Input 
-        type="text"
-        placeholder="New Todo"
-        value={todoText}
-        onChange={(e) => setTodoText(e.target.value)}
-      />
-      <Button onClick={addTodo}>Add Todo</Button>
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
-    </SectionContainer>
-  );
-}
-
-export default Section;
+    const [todos, setTodos] = useState(section.todos);
+    const [inputText, setInputText] = useState('');
+  
+    const addTodo = () => {
+      if (!inputText) return;
+      const newTodo = { id: Date.now(), text: inputText };
+      setTodos([...todos, newTodo]);
+      setInputText('');
+    };
+  
+    const deleteTodo = (todoId) => {
+      setTodos(todos.filter(todo => todo.id !== todoId));
+    };
+  
+    return (
+      <SectionContainer>
+        <h3>{section.name}</h3>
+        <Input
+          type="text"
+          placeholder="할 일 추가"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+        <Button onClick={addTodo}>추가</Button>
+        {todos.map(todo => (
+          <TodoItem key={todo.id} todo={todo} onDelete={deleteTodo} />
+        ))}
+      </SectionContainer>
+    );
+  }
+  
+  export default Section;

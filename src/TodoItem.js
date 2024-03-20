@@ -9,10 +9,24 @@ const ItemContainer = styled.div`
 	border-bottom: 1px solid #eee;
 `;
 
-function TodoItem({ todo }) {
+const Button = styled.button`
+	padding: 5px 10px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #0056b3;
+	}
+`;
+
+function TodoItem({ todo, onDelete }) {
 	return (
 		<ItemContainer>
 			<span>{todo.text}</span>
+			<Button onClick={() => onDelete(todo.id)}>완료</Button>
 		</ItemContainer>
 	);
 }
