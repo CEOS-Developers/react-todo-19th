@@ -29,13 +29,8 @@ const SubmitButton = styled.button`
     justify-content: center;
 `
 
-function TodoInputField() {
-//로컬스토리지 기존 값 가져오기
-const savedLists = localStorage.getItem("lists")? JSON.parse(localStorage.getItem("lists")):[];
-const [lists, setLists] = useState(savedLists);
-
+function TodoInputField({ lists, setLists, value, setValue}) {
 //inputfield에 값 넣기
-const [value, setValue] = useState("");
 const handleChange = (e) =>{
     setValue(e.target.value);
 }
@@ -54,7 +49,7 @@ const onSubmit = (e) => {
 function getList(todo) {
     const newList = {
         id: dayjs(),
-        todo: todo,
+        title: todo,
         completed: false
     }
     setLists([...lists, newList]);

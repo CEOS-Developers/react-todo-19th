@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Date from './Date';
-import ListsWrapper from './Lists/ListsWrapper';
 import ListsCount from './Lists/ListsCount';
 import styled from 'styled-components';
 import TodoInputField from './Lists/TodoInputField';
-
+import { useState } from 'react';
+import ListsItems from './Lists/ListsItems';
 //전체 틀 잡기
 const TodoContainer = styled.div`
     background-color: aliceblue;
@@ -30,29 +30,77 @@ const TodoLists = styled.div`
     background-color: beige;
     display: flex;
     flex-direction: column;
-    width: 50%;
-   `
+    width:50%;
+`
 const DoneLists = styled.div`
     background-color: beige;
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width:50%;
 `
 
 
 export default function Todos() {
+//로컬스토리지 기존 값 가져오기
+const savedLists = localStorage.getItem("lists")? JSON.parse(localStorage.getItem("lists")):[];
+const [lists, setLists] = useState(savedLists);
+const [value, setValue] = useState("");
+
+
+const deleteTodo = (id) => {
+    let deletedTodo = lists.filter((data) => data.id !== id);
+    setLists(deletedTodo);
+    localStorage.setItem("lists", JSON.stringify(deletedTodo));
+  };
+
+const toggleTodo = (id) => {
+    let toggledTodo = lists.map((data) =>
+      data.id === id ? { ...data, completed: !data.completed } : data
+    );
+    setLists(toggledTodo);
+    localStorage.setItem("lists", JSON.stringify(toggledTodo));
+  };
+
+
+  
   return (
     <TodoContainer>
         <Date/>
         <Wrapper>
         <TodoLists>
-            <TodoInputField/>
-            <ListsWrapper/>
+            <TodoInputField
+             lists={lists}
+             value={value}
+             setLists={setLists}
+             setValue={setValue}
+            />
+            {lists.map((data)=>
+            data.completed ? <></>:
+            <ListsItems
+            key = {data.id}
+            todo = {data.title}
+            data = {data}
+            toggleTodo = {toggleTodo}
+            deleteTodo = {deleteTodo}
+            />
+            )}
+             
             <ListsCount/>
         </TodoLists>
+       
         <DoneLists>
             <h4>Done</h4>
-            <ListsWrapper/>
+            {lists.map((data)=>
+            data.completed ? 
+            <ListsItems
+            key = {data.id}
+            todo = {data.title}
+            data = {data}
+            toggleTodo = {toggleTodo}
+            deleteTodo = {deleteTodo}
+            /> : <></>
+            )}
+            
             <ListsCount/>
         </DoneLists>
         </Wrapper>
