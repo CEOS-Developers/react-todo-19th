@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import { ReactComponent as NotCheckImg } from "../../assets/NotCheck.svg";
+import { ReactComponent as CheckImg } from "../../assets/checkComplete.svg";
+
+export const NotCheck = styled(NotCheckImg)`
+  cursor: pointer;
+`;
+
+export const Check = styled(CheckImg)`
+  cursor: pointer;
+`;
 
 export const Wrapper = styled.div`
   width: 100%;

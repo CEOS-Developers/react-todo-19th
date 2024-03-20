@@ -12,7 +12,10 @@ export default function TodoListPage() {
   const onClickSubmit = (event) => {
     event.preventDefault();
     if (!todo.trim()) return;
-    setTodoList([...todoList, todo]);
+
+    const newTodo = { text: todo, checked: false };
+    setTodoList([...todoList, newTodo]);
+
     // todo 상태 초기화
     setTodo("");
   };
@@ -25,6 +28,13 @@ export default function TodoListPage() {
     );
   };
 
+  const onClickToggle = (currentIndex) => {
+    const updatedTodo = todoList.map((item, index) =>
+      index === currentIndex ? { ...item, checked: !item.checked } : item,
+    );
+    setTodoList(updatedTodo);
+  };
+
   return (
     <T.Wrapper>
       <T.Header>✓ To Do</T.Header>
@@ -35,7 +45,7 @@ export default function TodoListPage() {
         {/*  input container  */}
         <T.WriteForm>
           <T.TodoForm>
-            <T.CheckBoxImg />
+            <T.NotCheck />
             <T.TodoInput type="text" onChange={onChangeTodo} value={todo} />
             <T.SubmitBtn onClick={onClickSubmit}>추가</T.SubmitBtn>
           </T.TodoForm>
@@ -45,7 +55,14 @@ export default function TodoListPage() {
         <T.TodoList>
           {todoList?.map((item, index) => (
             <T.TodoListLi key={index}>
-              <T.TodoListSpan>{item}</T.TodoListSpan>
+              {item.checked ? (
+                <div value={index}>
+                  <T.Check onClick={() => onClickToggle(index)} />
+                </div>
+              ) : (
+                <T.NotCheck onClick={() => onClickToggle(index)} />
+              )}
+              <T.TodoListSpan>{item.text}</T.TodoListSpan>
               <T.TodoListBtn
                 type="button"
                 onClick={onClickDelete}
