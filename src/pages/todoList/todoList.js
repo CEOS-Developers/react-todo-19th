@@ -9,11 +9,20 @@ export default function TodoListPage() {
     setTodo(event.currentTarget.value);
   };
 
-  const onClickSubmit = () => {
+  const onClickSubmit = (event) => {
+    event.preventDefault();
     if (!todo.trim()) return;
     setTodoList([...todoList, todo]);
     // todo 상태 초기화
     setTodo("");
+  };
+
+  const onClickDelete = (event) => {
+    setTodoList(
+      todoList.filter(
+        (_, index) => index !== parseInt(event.currentTarget.value),
+      ),
+    );
   };
 
   return (
@@ -27,7 +36,7 @@ export default function TodoListPage() {
         <T.WriteForm>
           <T.TodoForm>
             <T.CheckBoxImg />
-            <T.TodoInput type="text" onChange={onChangeTodo} />
+            <T.TodoInput type="text" onChange={onChangeTodo} value={todo} />
             <T.SubmitBtn onClick={onClickSubmit}>추가</T.SubmitBtn>
           </T.TodoForm>
         </T.WriteForm>
@@ -37,7 +46,13 @@ export default function TodoListPage() {
           {todoList?.map((item, index) => (
             <T.TodoListLi key={index}>
               <T.TodoListSpan>{item}</T.TodoListSpan>
-              <T.TodoListBtn type="button" />
+              <T.TodoListBtn
+                type="button"
+                onClick={onClickDelete}
+                value={index}
+              >
+                삭제
+              </T.TodoListBtn>
             </T.TodoListLi>
           ))}
         </T.TodoList>
