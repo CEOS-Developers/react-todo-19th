@@ -108,6 +108,25 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+overflow-y: auto;
+
+
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #EBEBEB;
+    border-radius: 5px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #DCDCDC;
+    cursor: pointer;
+  }
+  
 `;
 
 const ContentContaner = styled.body`
@@ -124,7 +143,7 @@ align-items: center;
 
 `;
 const Header = styled.div`
- width: 80%
+ width: 70%
 `;
 
 const TitleWrapper = styled.div`
@@ -142,7 +161,7 @@ const ProgressStatusNumber = styled.span`
 `;
 
 const InputContainer = styled.div`
-width: 80%;
+width: 70%;
 display: flex;
 flex-direction: row; //인풋칸이랑 버튼 가로로 나열되게
 justify-content: center;
@@ -157,6 +176,7 @@ color: ${props => props.hasContent ? '#4A90E2' : '#000'};
 font-family: 'SUIT-Regular';
 font-size: 12px;
 margin-right: 10px; 
+width: 80%;
 
 &:focus {
     outline: none; 
@@ -169,7 +189,7 @@ const ButtonContainer = styled.div`
   display: flex; 
   flex-direction: row; 
   justify-content: flex-end;  
-  width: 80%;
+  width: 67%;
   margin-top: 10px;
   margin-left:10px;
 `;

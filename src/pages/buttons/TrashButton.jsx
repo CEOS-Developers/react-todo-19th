@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const TrashButton = ({ onClick }) => {
     return (
-        <StyledButton onClick={onClick}>
-            <img src="./assets/Trash.png" alt="Trash" style={{ width: '40px', height: '40px' }} />
+        <StyledButton type="button" onClick={onClick}>
+        <img src="./assets/Trash.png" alt="Trash" style={{ width: '40px', height: '40px' }} />
         </StyledButton>
     );
 };

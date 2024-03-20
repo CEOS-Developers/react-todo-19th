@@ -9,7 +9,7 @@ const TodoList = ({ items, selectedIds, onToggleSelect }) => {
             {item.isCompleted ? (
             <CheckIcon src="./assets/Completed.png" alt="Check Icon" />
           ) : (
-            <Priority>{index + 1}</Priority>
+            <Priority>{index + 1} .</Priority>
           )}
             <ListItem
             isSelected={selectedIds.includes(item.id)}
@@ -27,8 +27,8 @@ const TodoList = ({ items, selectedIds, onToggleSelect }) => {
 export default TodoList;
 
 const ListContainer = styled.ul`
-  width: 80%;
-  max-height: 250px;
+  width: 67%;
+  max-height: 350px;
   overflow-y: auto;
   list-style-type: none;
   padding: 0;

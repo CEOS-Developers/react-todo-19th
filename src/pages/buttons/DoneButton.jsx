@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const DoneButton = ({ onClick }) => {
     return (
-        <StyledButton onClick={onClick}>
-            <img src="./assets/Checked.png" alt="Checked" style={{ width: '20px', height: '20px' }} />
+        <StyledButton type="button" onClick={onClick}>
+        <img src="./assets/Checked.png" alt="Checked" style={{ width: '20px', height: '20px' }} />
         </StyledButton>
     );
 };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const AddButton = ({ onClick }) => {
     return (
-      <StyledButton onClick={onClick}>
+      <StyledButton type="button" onClick={onClick}>
         <img src="./assets/AddButton.png" alt="Add" style={{ width: '15px', height: '20px' }} />
       </StyledButton>
     );
