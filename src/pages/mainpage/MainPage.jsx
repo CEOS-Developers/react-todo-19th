@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import styled from "styled-components";
 import DateBar from "./DateBar";
 import AddButton from "../buttons/AddButton";
@@ -9,67 +8,70 @@ import ResetButton from "../buttons/ResetButton";
 import TodoList from "../lists/TodoList";
 
 const MainPage = () => {
-    const [inputValue, setInputValue] = useState(""); // 입력 값 추적
-    const [thingsToDo, setThingsToDo] = useState([]);
-
-    const handleInputChange = (e) => {
-        setInputValue(e.target.value);
-    };
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-          handleAddTodo();
-          e.preventDefault();
-        }
-      };
+    const [inputValue, setInputValue] = useState("");
+    const [items, setItems] = useState([]); // 할 일 목록
+    const [completedItems, setCompletedItems] = useState([]); // 완료 목록
+    const [selectedIds, setSelectedIds] = useState([]);
+    
+    const handleInputChange = e => setInputValue(e.target.value);
 
     const handleAddTodo = () => {
-        if (!inputValue.trim()) return; // 빈 입력 방지
-        setThingsToDo([...thingsToDo, inputValue]);
-        setInputValue(''); // 입력 필드 초기화
-      };
+        if (!inputValue.trim()) return;
+        const newTodo = { id: Date.now(), text: inputValue, isCompleted: false };
+        setItems(prevItems => [...prevItems, newTodo]);
+        setInputValue("");
+    };
+
+    // 선택 핸드러
+    const toggleSelectTodo = id => {
+        setSelectedIds(prevSelectedIds =>
+            prevSelectedIds.includes(id) ? prevSelectedIds.filter(sid => sid !== id) : [...prevSelectedIds, id]
+        );
+    };
+    // 완료 핸들러
+    const handleCompleteTodo = () => {
+        const updatedItems = items.filter(item => !selectedIds.includes(item.id));
+        const completedNewItems = items.filter(item => selectedIds.includes(item.id))
+                                        .map(item => ({ ...item, isCompleted: true }));
+        setItems(updatedItems);
+        setCompletedItems(prevCompleted => [...prevCompleted, ...completedNewItems]);
+        setSelectedIds([]);
+    };
 
 
-
-
+    // 할일 목록이랑 완료 목록 합치기
+    const displayItems = [...items, ...completedItems];
 
 
     return (
         <PageContainer>
             <ContentContaner>
-            <Header>
-                <TitleWrapper>
-                    <Title>투두리스트</Title>
-                    <ProgressStatusNumber/>
-                </TitleWrapper>
-                <DateBar/>
-            </Header>
-
-            <InputContainer>
-                <TodoInput 
-                type="text" 
-                placeholder="오늘의 할일..." 
-                value={inputValue} // 입력값 상태
-                onChange={handleInputChange}
-                hasContent={inputValue.length > 0} //입력값 있으면 prop 전달!!
-                onKeyDown={handleKeyDown} //엔터키로 버튼누르기
-                />
-                <AddButton onClick={handleAddTodo} />
-             </InputContainer>
-
-            <ButtonContainer>
-                <TrashButton/>
-                <DoneButton/>
-                <ResetButton/>  
-            </ButtonContainer>
-
-            <ListContainer>
-                <TodoList items={thingsToDo}/>
-                <DoneList/>
-            </ListContainer>
-            <Footer>
-                <ProgressBar/>
-            </Footer>
+                <Header>
+                    <TitleWrapper>
+                        <Title>투두리스트</Title>
+                        <ProgressStatusNumber/>
+                    </TitleWrapper>
+                    <DateBar/>
+                </Header>
+                <InputContainer>
+                    <TodoInput 
+                    type="text" 
+                    placeholder="오늘의 할일..." 
+                    value={inputValue} // 입력값 상태
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => e.key === 'Enter' && handleAddTodo()} //엔터키로 버튼누르기
+                    />
+                    <AddButton onClick={handleAddTodo} />
+                </InputContainer>
+                <ButtonContainer>
+                    <TrashButton/>
+                    <DoneButton onClick={handleCompleteTodo} />  
+                    <ResetButton/>  
+                </ButtonContainer>
+                <TodoList items={displayItems} selectedIds={selectedIds} onToggleSelect={toggleSelectTodo} />
+                <Footer>
+                    <ProgressBar/>
+                </Footer>
             </ContentContaner>
         </PageContainer>
     )
@@ -90,7 +92,7 @@ justify-content: center;
 `;
 
 const ContentContaner = styled.body`
-width: 30%;
+width: 50%;
 min-width: 260px; //padding 계산해서 최소 너비 설정
 height: 60%;
 min-height: 420px;  //padding 계산해서 최소 높이 설정
@@ -156,10 +158,7 @@ const ButtonContainer = styled.div`
 
 const ListContainer = styled.div`
 width: 80%;
-`;
 
-const DoneList = styled.ul`
-  
 `;
 
 const Footer = styled.div`
