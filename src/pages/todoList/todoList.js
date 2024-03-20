@@ -54,7 +54,7 @@ export default function TodoListPage() {
         {/*  input container  */}
         <T.WriteForm>
           <T.TodoForm>
-            <T.NotCheck />
+            <T.InputCheckImg />
             <T.TodoInput type="text" onChange={onChangeTodo} value={todo} />
             <T.SubmitBtn onClick={onClickSubmit}>추가</T.SubmitBtn>
           </T.TodoForm>

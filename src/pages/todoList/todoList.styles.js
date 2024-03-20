@@ -1,13 +1,26 @@
 import styled from "styled-components";
 import { ReactComponent as NotCheckImg } from "../../assets/NotCheck.svg";
 import { ReactComponent as CheckImg } from "../../assets/checkComplete.svg";
+import { ReactComponent as InputCheck } from "../../assets/check.svg";
 
 export const NotCheck = styled(NotCheckImg)`
+  width: 29px;
+  height: 29px;
+
   cursor: pointer;
 `;
 
 export const Check = styled(CheckImg)`
+  margin-top: 5px;
+  width: 25px;
+  height: 25px;
+
   cursor: pointer;
+`;
+
+export const InputCheckImg = styled(InputCheck)`
+  width: 30px;
+  height: 30px;
 `;
 
 export const Wrapper = styled.div`
@@ -81,7 +94,7 @@ export const TodoInput = styled.input`
   outline: none;
   border: none;
   color: #e9ecef;
-  padding: 10px;
+  padding: 10px 28px;
   ::placeholder {
     color: #788bff;
   }
@@ -91,10 +104,10 @@ export const SubmitBtn = styled.button`
   cursor: pointer;
   background-color: #252423;
   border: 1px solid #788bff;
-  width: 36px;
-  height: 22px;
+  width: 40px;
+  height: 26px;
   border-radius: 10px;
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: #788bff;
   :hover {
     background-color: #3c3a39;
@@ -110,7 +123,7 @@ export const TodoListLi = styled.li`
   width: 100%;
   height: 52px;
   border-radius: 10px;
-  font-size: 0.81rem;
+  font-size: 1rem;
 
   display: flex;
   justify-content: space-between;
@@ -132,10 +145,10 @@ export const TodoListBtn = styled.button`
   cursor: pointer;
   background-color: #252423;
   border: 1px solid #788bff;
-  width: 36px;
-  height: 22px;
+  width: 40px;
+  height: 26px;
   border-radius: 10px;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #788bff;
 
   :hover {
