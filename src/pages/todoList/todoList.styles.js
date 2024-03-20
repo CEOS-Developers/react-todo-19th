@@ -54,6 +54,35 @@ export const TodoContainer = styled.div`
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 `;
 
+export const HeadWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const TodoCountContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  font-size: 0.8rem;
+  color: white;
+`;
+export const TodoDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const TextP = styled.p`
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-left: 10px;
+`;
+export const TextP2 = styled.p`
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-left: 10px;
+  color: #788bff;
+`;
+
 export const Title = styled.h1``;
 
 export const TodayDate = styled.p`

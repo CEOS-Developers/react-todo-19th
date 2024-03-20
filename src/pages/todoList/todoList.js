@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import * as T from "./todoList.styles";
 
 export default function TodoListPage() {
+  // const [todoNum, setTodoNum] = useState(0);
+  // const [doneTodoNum, setDoneTodoNum] = useState(0);
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState(() => {
     // 로컬스토리지에서 할일 불러오기
     const savedTodo = localStorage.getItem("todoItem");
     return savedTodo ? JSON.parse(savedTodo) : [];
   });
+
+  // 오늘 날짜
+  const today = new Date().toISOString().slice(0, 10);
 
   // todoList 변경 시 로컬스토리지 업데이트
   useEffect(() => {
@@ -44,13 +49,29 @@ export default function TodoListPage() {
     setTodoList(updatedTodo);
   };
 
+  // 할 일 갯수 계산
+  const todoCount = todoList.length;
+  const completedCount = todoList.filter((item) => item.checked).length;
+  const notCompletedCount = todoCount - completedCount;
+
   return (
     <T.Wrapper>
       <T.Header>✓ To Do</T.Header>
       <T.TodoContainer>
-        <T.Title>오늘 할 일</T.Title>
-        <T.TodayDate></T.TodayDate>
-
+        <T.HeadWrapper>
+          <div>
+            <T.Title>오늘 할 일</T.Title>
+            <T.TodayDate>{today}</T.TodayDate>
+          </div>
+          <T.TodoCountContainer>
+            <T.TodoDiv>
+              todo : <T.TextP>{notCompletedCount}</T.TextP>
+            </T.TodoDiv>
+            <T.TodoDiv>
+              complete : <T.TextP2>{completedCount}</T.TextP2>
+            </T.TodoDiv>
+          </T.TodoCountContainer>
+        </T.HeadWrapper>
         {/*  input container  */}
         <T.WriteForm>
           <T.TodoForm>
