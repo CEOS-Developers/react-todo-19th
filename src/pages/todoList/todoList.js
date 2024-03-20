@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as T from "./todoList.styles";
 
 export default function TodoListPage() {
   const [todo, setTodo] = useState("");
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(() => {
+    // 로컬스토리지에서 할일 불러오기
+    const savedTodo = localStorage.getItem("todoItem");
+    return savedTodo ? JSON.parse(savedTodo) : [];
+  });
+
+  // todoList 변경 시 로컬스토리지 업데이트
+  useEffect(() => {
+    localStorage.setItem("todoItem", JSON.stringify(todoList));
+  }, [todoList]);
 
   const onChangeTodo = (event) => {
     setTodo(event.currentTarget.value);
