@@ -23,7 +23,7 @@ export default function TodoListPage() {
     if (!todo.trim()) return;
 
     const newTodo = { text: todo, checked: false };
-    setTodoList([...todoList, newTodo]);
+    setTodoList([newTodo, ...todoList]);
 
     // todo 상태 초기화
     setTodo("");
