@@ -46,6 +46,18 @@ const MainPage = () => {
         setSelectedIds([]);
     };
 
+    // 리셋 핸들러(완료 목록에 있던 요소를 할 일 목록으로 이동하고 선택 상태 제거)
+    const handleReset = () => {
+        const updatedItems = items.map(item => selectedIds.includes(item.id) ? { ...item, isCompleted: false, isSelected: false } : item);
+        const updatedCompletedItems = completedItems.filter(item => !selectedIds.includes(item.id));
+        const resetCompletedItems = completedItems.filter(item => selectedIds.includes(item.id)).map(item => ({ ...item, isCompleted: false, isSelected: false }));
+    
+        setItems([...updatedItems, ...resetCompletedItems]);
+        setCompletedItems(updatedCompletedItems);
+        setSelectedIds([]);
+    };
+    
+
     // 할일 목록이랑 완료 목록 합치기
     const displayItems = [...items, ...completedItems];
 
@@ -74,8 +86,7 @@ const MainPage = () => {
                 <ButtonContainer>
                     <TrashButton onClick={handleDeleteTodo}/>
                     <DoneButton onClick={handleCompleteTodo} />  
-                    <ResetButton/>  
-                </ButtonContainer>
+                    <ResetButton onClick={handleReset} />                 </ButtonContainer>
                 <TodoList items={displayItems} selectedIds={selectedIds} onToggleSelect={toggleSelectTodo} />
                 <Footer>
                     <ProgressBar/>

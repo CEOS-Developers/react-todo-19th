@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 
 const TodoList = ({ items, selectedIds, onToggleSelect  }) => {
+
   return (
     <ListContainer>
       {items.map(item => (
@@ -27,7 +28,7 @@ const ListContainer = styled.ul`
   width: 80%;
   max-height: 250px;
   overflow-y: auto; // 최대 높이 벗어나면 스크롤 생기게
-  list-style: num;
+  list-style-type: none;
   padding: 0;
   margin-top: 10px;
 `;
