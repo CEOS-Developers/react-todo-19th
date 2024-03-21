@@ -17,7 +17,6 @@ const Main = () => {
   const [value, setValue] = useState("");
   const handleOnchange = (e) => {
     setValue(e.target.value);
-    console.log(value);
   };
 
   const handleSubmit = () => {
@@ -30,6 +29,13 @@ const Main = () => {
       },
     ]);
     setValue("");
+  };
+
+  const toggleTodo = (id) => {
+    const updatedData = data.map((el) =>
+      el.id === id ? { ...el, isDone: !el.isDone } : el
+    );
+    setData(updatedData);
   };
 
   return (
@@ -60,14 +66,24 @@ const Main = () => {
         <div>
           <Title>TODO</Title>
           <TodoList>
-            {data.map((el) => el.isDone || <TodoItem key={el.id} item={el} />)}
+            {data.map(
+              (el) =>
+                el.isDone || (
+                  <TodoItem key={el.id} item={el} toggleTodo={toggleTodo} />
+                )
+            )}
           </TodoList>
         </div>
         <Line></Line>
         <div>
           <Title>DONE</Title>
           <TodoList>
-            {data.map((el) => el.isDone && <TodoItem key={el.id} item={el} />)}
+            {data.map(
+              (el) =>
+                el.isDone && (
+                  <TodoItem key={el.id} item={el} toggleTodo={toggleTodo} />
+                )
+            )}
           </TodoList>
         </div>
       </TodoWrapper>
