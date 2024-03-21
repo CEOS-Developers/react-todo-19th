@@ -19,8 +19,9 @@ export const Check = styled(CheckImg)`
 `;
 
 export const InputCheckImg = styled(InputCheck)`
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
 `;
 
 export const Wrapper = styled.div`
@@ -30,6 +31,10 @@ export const Wrapper = styled.div`
   flex-direction: column;
 
   align-items: center;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Header = styled.div`
@@ -43,6 +48,10 @@ export const Header = styled.div`
   line-height: 6vh;
   font-size: 1.1rem;
   border-bottom: 1px solid #484644;
+
+  @media (max-width: 768px) {
+    padding-left: 20px;
+  }
 `;
 
 export const TodoContainer = styled.div`
@@ -52,6 +61,10 @@ export const TodoContainer = styled.div`
   padding: 30px;
   border-radius: 5px;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const HeadWrapper = styled.div`
@@ -98,6 +111,10 @@ export const WriteForm = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #252423;
+
+  @media (max-width: 768px) {
+    height: 45px;
+  }
 `;
 
 export const TodoForm = styled.form`
@@ -107,6 +124,10 @@ export const TodoForm = styled.form`
   flex-direction: row;
   align-items: center;
   padding: 0 15px 0 15px;
+
+  @media (max-width: 768px) {
+    height: 45px;
+  }
 `;
 
 export const CheckBoxImg = styled.img`
@@ -124,8 +145,15 @@ export const TodoInput = styled.input`
   border: none;
   color: #e9ecef;
   padding: 10px 28px;
+  font-size: 0.73rem;
   ::placeholder {
-    color: #788bff;
+    height: 45px;
+    padding: 8px;
+    font-size: 0.73rem;
+  }
+
+  @media (max-width: 768px) {
+    height: 45px;
   }
 `;
 
@@ -140,6 +168,12 @@ export const SubmitBtn = styled.button`
   color: #788bff;
   :hover {
     background-color: #3c3a39;
+  }
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 25px;
+    font-size: 10px;
   }
 `;
 
@@ -163,6 +197,10 @@ export const TodoListLi = styled.li`
   margin: 5px 0px;
   padding: 0 15px 0 15px;
   color: #cdcdcd;
+
+  @media (max-width: 768px) {
+    height: 45px;
+  }
 `;
 export const TodoListSpan = styled.span`
   width: 100%;
@@ -182,5 +220,11 @@ export const TodoListBtn = styled.button`
 
   :hover {
     background-color: #3c3a39;
+  }
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 25px;
+    font-size: 10px;
   }
 `;

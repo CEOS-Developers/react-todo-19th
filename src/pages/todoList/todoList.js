@@ -76,7 +76,12 @@ export default function TodoListPage() {
         <T.WriteForm>
           <T.TodoForm>
             <T.InputCheckImg />
-            <T.TodoInput type="text" onChange={onChangeTodo} value={todo} />
+            <T.TodoInput
+              type="text"
+              onChange={onChangeTodo}
+              value={todo}
+              placeholder="할 일을 입력해주세요."
+            />
             <T.SubmitBtn onClick={onClickSubmit}>추가</T.SubmitBtn>
           </T.TodoForm>
         </T.WriteForm>
