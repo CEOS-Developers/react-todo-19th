@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import Date from './Date';
-import ListsCount from './Lists/ListsCount';
 import styled from 'styled-components';
 import TodoInputField from './Lists/TodoInputField';
 import { useState } from 'react';
@@ -38,7 +37,9 @@ const DoneLists = styled.div`
     flex-direction: column;
     width:50%;
 `
-
+const ListsCount = styled.div`
+    
+`
 
 export default function Todos() {
 //로컬스토리지 기존 값 가져오기
@@ -62,6 +63,9 @@ const toggleTodo = (id) => {
   };
 
 
+  const todoCount = lists.filter((data) => !data.completed).length;
+  const doneCount = lists.filter((data) => data.completed).length;
+  
   
   return (
     <TodoContainer>
@@ -85,7 +89,7 @@ const toggleTodo = (id) => {
             />
             )}
              
-            <ListsCount/>
+            <ListsCount>{todoCount} lists are left</ListsCount>
         </TodoLists>
        
         <DoneLists>
@@ -101,7 +105,7 @@ const toggleTodo = (id) => {
             /> : <></>
             )}
             
-            <ListsCount/>
+            <ListsCount>{doneCount} lists are done! way to go : )</ListsCount>
         </DoneLists>
         </Wrapper>
     </TodoContainer>
