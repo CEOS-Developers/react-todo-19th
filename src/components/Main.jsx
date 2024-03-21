@@ -64,18 +64,18 @@ const Main = () => {
       </InputWrapper>
 
       <ProgressWrapper>
-        <ProgressText>
+        <span>
           {totalCount !== 0 && doneCount === totalCount
             ? "최고예요"
             : "달려봐요"}{" "}
           !
-        </ProgressText>
+        </span>
         <ProgressBar>
           <ProgressBarDone
             $ratio={(doneCount / totalCount) * 100}
           ></ProgressBarDone>
         </ProgressBar>
-        <ProgressCount>{doneCount + " / " + totalCount}</ProgressCount>
+        <span>{doneCount + " / " + totalCount}</span>
       </ProgressWrapper>
 
       <TodoWrapper>
@@ -155,8 +155,6 @@ const ProgressWrapper = styled.section`
   font-size: 22px;
 `;
 
-const ProgressText = styled.span``;
-
 const ProgressBar = styled.span`
   background-color: #c0c0c0;
   border-radius: 10px;
@@ -172,8 +170,6 @@ const ProgressBarDone = styled.span`
   transition: width 0.4s ease-in-out;
   width: ${(props) => props.$ratio}%;
 `;
-
-const ProgressCount = styled.span``;
 
 //Todo
 const TodoWrapper = styled.section`
