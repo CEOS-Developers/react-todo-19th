@@ -1,9 +1,7 @@
+import Todo from 'components/Todo';
+
 function App() {
-  return (
-    <div className="App">
-      <h1>CEOS 19기 프론트엔드 파이팅!( ¨̮ )و✧🔥</h1>
-    </div>
-  );
+  return <Todo />;
 }
 
 export default App;

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-
+import MeetmeRegular from 'font/meetme.woff';
 export const device = {
   tablet: `(min-width: 768px) and (max-width: 1199px)`,
   mobile: `(max-width: 767px)`,
@@ -8,8 +8,8 @@ export const device = {
 export const GlobalStyle = createGlobalStyle`
 
 @font-face {
-  font-family: 'Ownglyph_meetme-Rg';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2402_1@1.0/Ownglyph_meetme-Rg.woff2') format('woff2');
+  font-family: 'meetme';
+  src: url(${MeetmeRegular}) format('woff');
 }
 
 /*
@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
   padding: 0;
   font: inherit;
   color: inherit;
-  font-family: 'Ownglyph_meetme-Rg';
+  font-family: 'meetme';
 }
 
 html,
@@ -118,5 +118,40 @@ button {
   isolation: isolate;
 }
 
-  
+
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body,
+button,
+input,
+h1,
+h2 {
+  line-height: normal;
+  font-style: normal;
+  font-weight: 400;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+#__next {
+  height: 100%;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  flex: 1;
+}
+
 `;
