@@ -1,20 +1,47 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaw, faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { useState } from "react";
+import TodoItem from "./TodoItem";
 
 const Main = () => {
+  const data = [
+    { id: 1, content: "샤워하기", isDone: false },
+    { id: 2, content: "놀기", isDone: false },
+    { id: 3, content: "나는 Done이지롱~", isDone: true },
+    { id: 4, content: "룰루랄라", isDone: false },
+    { id: 5, content: "먀옹", isDone: true },
+    { id: 6, content: "Done~", isDone: true },
+  ];
+
+  const [value, setValue] = useState("");
+  const handleOnchange = (e) => {
+    setValue(e.target.value);
+    console.log(value);
+  };
+
+  const handleSubmit = () => {
+    // 제출하기
+    setValue("");
+  };
   return (
     <Wrapper>
       <InputWrapper>
         <FontAwesomeIcon icon={faPaw} size="lg" />
-        <Input />
-        <SubmitBtn>
+        <Input
+          onKeyDown={(e) => {
+            e.key === "Enter" && handleSubmit();
+          }}
+          onChange={handleOnchange}
+          value={value}
+        />
+        <SubmitBtn onClick={handleSubmit}>
           <FontAwesomeIcon icon={faCirclePlus} size="xl" />
         </SubmitBtn>
       </InputWrapper>
 
       <ProgressWrapper>
-        <ProgressText>달려봐요!</ProgressText>
+        <ProgressText>달려봐요 !</ProgressText>
         <ProgressBar>
           <ProgressBarDone></ProgressBarDone>
         </ProgressBar>
@@ -22,13 +49,19 @@ const Main = () => {
       </ProgressWrapper>
 
       <TodoWrapper>
-        <Todo>
+        <div>
           <Title>TODO</Title>
-        </Todo>
+          <TodoList>
+            {data.map((el) => el.isDone || <TodoItem key={el.id} item={el} />)}
+          </TodoList>
+        </div>
         <Line></Line>
-        <Done>
+        <div>
           <Title>DONE</Title>
-        </Done>
+          <TodoList>
+            {data.map((el) => el.isDone && <TodoItem key={el.id} item={el} />)}
+          </TodoList>
+        </div>
       </TodoWrapper>
     </Wrapper>
   );
@@ -101,14 +134,17 @@ const TodoWrapper = styled.section`
   padding: 30px;
 `;
 
-const Todo = styled.div``;
 const Line = styled.div`
   border: 1px dashed rgba(125, 126, 126, 0.5);
   margin: 5px 20px;
 `;
-const Done = styled.div``;
 
 const Title = styled.h3`
   font-size: 28px;
   padding-bottom: 17px;
+`;
+
+const TodoList = styled.ul`
+  display: grid;
+  row-gap: 10px;
 `;
