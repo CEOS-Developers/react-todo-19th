@@ -79,7 +79,7 @@ export default function TodoListPage() {
         {/*  input container  */}
         <T.WriteForm>
           <T.TodoForm>
-            <T.InputCheckImg />
+            <T.InputCheckImg alt="addTodo Icon" />
             <T.TodoInput
               type="text"
               onChange={onChangeTodo}
@@ -101,7 +101,7 @@ export default function TodoListPage() {
             >
               {item.checked ? (
                 <>
-                  <T.Check onClick={() => onClickToggle(index)} />
+                  <T.Check alt="check" onClick={() => onClickToggle(index)} />
                   <T.TodoListSpan
                     style={{ textDecoration: "line-through", color: "#808080" }}
                   >
@@ -110,7 +110,10 @@ export default function TodoListPage() {
                 </>
               ) : (
                 <>
-                  <T.NotCheck onClick={() => onClickToggle(index)} />
+                  <T.NotCheck
+                    alt="not check"
+                    onClick={() => onClickToggle(index)}
+                  />
                   <T.TodoListSpan>{item.text}</T.TodoListSpan>
                 </>
               )}
