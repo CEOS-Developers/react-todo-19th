@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import {styled} from 'styled-components';
 import Section from './Section';
+import GlobalStyle from './GlobalStyle';
+
+
 
 const AppContainer = styled.div`
   display: flex;
@@ -82,6 +85,7 @@ function App() {
 
   return (
     <AppContainer>
+    <GlobalStyle />
       <Input
         type="text"
         placeholder="새 섹션 이름"
