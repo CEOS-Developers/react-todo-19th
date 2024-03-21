@@ -81,6 +81,7 @@ export default function TodoListPage() {
               onChange={onChangeTodo}
               value={todo}
               placeholder="할 일을 입력해주세요."
+              maxLength="45"
             />
             <T.SubmitBtn onClick={onClickSubmit}>추가</T.SubmitBtn>
           </T.TodoForm>
