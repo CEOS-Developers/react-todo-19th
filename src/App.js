@@ -1,7 +1,11 @@
+import TodoListPage from "./pages/todoList/todoList";
+import { GlobalStyle } from "./styles/GlobalStyles";
+
 function App() {
   return (
     <div className="App">
-      <h1>CEOS 19기 프론트엔드 파이팅!( ¨̮ )و✧🔥</h1>
+      <GlobalStyle />
+      <TodoListPage />
     </div>
   );
 }

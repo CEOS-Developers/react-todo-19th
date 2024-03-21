@@ -1,68 +1,97 @@
-# 2주차 미션: React-Todo
+### 🔗 링크
+https://react-todo-19th-dh.vercel.app/
+<br/>
 
-# 서론
+### 📌 기능구현
+- 할 일 입력창(Form)에 텍스트를 입력하고 enter 혹은 버튼클릭으로 할 일 추가
+- 할 일 추가/삭제 시 애니메이션
+- 할 일 삭제
+- 할 일 완료 표시 
+- localStorage에 할 일, 완료 상태 저장
+- 모바일 (768px 이하) 반응형 스타일
+- 할 일과 완료된 할일 카운트
 
-안녕하세요 🙌🏻 19기 프론트엔드 운영진 **변지혜**입니다.
+<br/>
 
-다들 1주차 미션 Vanilla Todo 만드시느라 수고 많으셨습니다! 1주차 미션을 통해 여러분들께서 본격적인 React 사용에 앞서 Vanilla JS로 SPA를 만들때의 불편한 점을 느끼셨을 것 이라 생각합니다.
+### 🤔 후기
+전 과제와 비교해보기 위해 똑같은 인터페이스를 React로 구현하는 것을 목적으로 이번 2주차 과제를 해보았습니다.
+html, css, javascript로 투두리스트를 구현하는 것보다 react 라이브러리를 이용해서 구현하는 것이 확실히 편리하다는 것을 느꼈습니다.<br/>
+특히 useState나 useEffect같은 React Hook으로 상태관리 하는 것이 DOM을 조작하는 것보다 직관적이고 관리하기 용이하고,<br/>
+StyledComponent로 스타일 관리하는 것이 적용이 휠씬 빠르고 직관적인 것 같습니다. 
 
-그리하여 이번 미션은, 1주차 스터의 미션으로 주어진 Todo list 만들기를 **React**로 리팩토링하는 것 입니다!
-기존에 리액트를 잘 아시던 분들께는, 조금 더 효울적인 디자인 패턴에 대해 고민할수 있는 주차가 될 것이고, 리액트를 제대로 접해보지 못하신 분들께는 기존의 어플리케이션을 리액트로 포팅하는 과정을 통해 왜 프론트엔드 시장에 리액트가 등장하게 되었고, 리액트에서 사용하는 여러가지 방식들이 왜 바닐라에 비해 효율적인지 꺠닫는 주차가 될 것이라 생각합니다.
+<br/>
 
-비교적 가벼운 미션인 만큼 코드를 짜는 데 있어 여러분의 **창의성**을 충분히 발휘해보시기 바랍니다. _❕작동하기만 하면 되는 것보다 같은 코드를 짜는 여러가지 방식과 패턴에 대해 많이 고민해보시고, 본인이 작성할 수 있는 가장 창의적인 방법으로 코드를 작성해주셨으면 합니다.❕_ 여러분이 미션 수행을 하는 과정에서 한 생각과 고민만큼 스터디에서 더 많은 것을 얻어가실 수 있을 거라 기대합니다!
+### 📄 Key Questions
 
-막히는 부분이 있더라도 우선 스스로 공부하고 찾아보면서 미션을 진행하는 방식을 권고드리지만, 미션과 관련하여 운영진의 도움이 필요하시다면 얼마든지 슬랙 Q&A 채널이나 프론트엔드 카톡방에 질문을 남겨 주세요!
+**1. Virtual-DOM은 무엇이고, 이를 사용함으로서 얻는 이점은 무엇인가요?**
+> Virtual DOM은 UI의 이상적인 또는 “가상”적인 표현을 메모리에 저장하고 ReactDOM과 같은 라이브러리에 의해 “실제” DOM과 동기화하는 프로그래밍 개념입니다.<br/>
+> DOM의 가벼운 복사본으로, 웹 애플리케이션의 상태 변화를 메모리 내에서 빠르게 처리하고 최소한의 DOM 업데이트를 통해 변화를 반영하는 방식입니다.<br/>
+> 실제 DOM은 웹 페이지의 구조와 내용을 브라우저가 이해하고 렌더링하는 데 사용되는 구조화된 트리 모델입니다.<br/>
+> 반면, Virtual-DOM은 변화가 있을 때 전체 트리를 다시 그리지 않고 변화가 필요한 부분만 식별하여 DOM에 효율적으로 반영함으로써,<br/>
+> 불필요한 DOM 조작을 최소화하고 애플리케이션의 성능을 향상시키는 주요 차이점을 가집니다.<br/>
+> 주로 React, Vue 등 라이브러리 및 프레임워크에서 널리 사용되어집니다.
+>
+> 
+> **이점**<br/>
+> 1. 효율적인 업데이트<br/>
+> Virtual-DOM은 애플리케이션의 상태가 변경될 때마다 전체 UI를 처음부터 다시 그리는지 않고, 변경된 부분만 실제 DOM에 반영됩니다.<br/>
+> 이는 DOM 조작 비용을 줄여 성능을 향상시킵니다.<br/>
+> 2. 빠른 성능<br/>
+> Virtual-DOM은 메모리 내에서 작동하기 때문에, 변경사항을 빠르게 계산하고 최소한의 실제 DOM 업데이트로 결과를 반영할 수 있습니다.<br/>
+> 이는 특히 복잡한 인터페이스에서 성능 이점을 제공합니다.
+> 3. 크로스 플랫폼 호환성<br/>
+> Virtual-DOM을 사용하면, 웹 브라우저 뿐만 아니라 모바일 애플리케이션(React Native와 같은)에서도 UI를 렌더링할 수 있습니다.<br/>
+> 이는 개발자가 다양한 플랫폼에서 일관된 사용자 경험을 제공할 수 있도록 합니다.
+<img width="614" alt="image" src="https://github.com/ddhelop/react-todo-19th-dh/assets/132553964/daf68eb1-751a-464a-b86a-dd4ec830ecb9"><br/>
+출처 : https://www.wikitechy.com/interview-questions/reactjs/what-is-react-dom/
 
-# 미션
+<br/>
 
-## 예시
+**2. 미션을 진행하면서 느낀, React를 사용함으로서 얻을수 있는 장점은 무엇이었나요?**
+> 1. 다양한 라이브러리(prettier, eslint, styled-component)를 사용할 수 있어 다양한 기능들을 편리하게 적용할 수 있었습니다.<br/>
+> 
+> 2. 전 과제에서 할 일 목록을 구현할 때, DOM 조작을 이용해서 element들을 추가하고, 삭제해서 관리했는데,<br/>
+> 이번 과제에서는 useState를 이용해서 할밀들을 배열로 관리하여, 보다 더 쉬운 아이디어를 활용하여 구현이 가능했습니다.<br/>
+> 
+> 3. 이번 과제에선 한가지 기능을 구현해서 컴포넌트를 통해 재사용성 활용을 하지 못했는데, 확실히 컴포넌트를 사용하여 UI를 구축하면,<br/>
+> 코드의 재사용성을 높이고, 대규모 애플리케이션의 개발과 유지보수를 용이할 것을 느꼈습니다.
+  
+<br/>
 
-- [리액트 투두 예시](https://react-todo-18th-lemon.vercel.app/)
+**3. React에서 상태란 무엇이고 어떻게 관리할 수 있을까요?**
+> React에서 상태(state)는 컴포넌트의 상태 정보를 담고 있는 객체로,<br/>
+> 컴포넌트의 동작, 콘텐츠, 그리고 렌더링에 영향을 미치는 데이터를 말합니다.<br/>
+> 상태는 동적인 데이터를 다룰 때 중요하며, 사용자 상호작용이나 시간의 경과에 따라 변경될 수 있습니다.<br/>
+><img width="523" alt="image" src="https://github.com/ddhelop/react-todo-19th-dh/assets/132553964/4c47fff5-11a4-4f89-b5ae-ab41b8fe7a1d"><br/>
+출처 : https://dev.to/stuxnat/final-react-project-2poi
+> 1. 컴포넌트 내부 상태(State)<br />
+> 각 React 컴포넌트는 자신의 state 객체를 가질 수 있으며,
+> **this.setState()(클래스 컴포넌트)** 또는 **useState 훅(함수 컴포넌트)** 을 사용하여 상태를 업데이트할 수 있습니다.<br/>
+> 상태가 변경될 때마다 React는 컴포넌트를 재렌더링하여 사용자 인터페이스를 최신 상태로 유지합니다.
+> 
+> 2. React Hooks <br/>
+> useState, useReducer, useContext와 같은 React Hooks는 함수 컴포넌트에서 상태 관리를 보다 선언적으로 할 수 있게 해줍니다.<br/>
+> **useState**는 간단한 상태 값 관리에 사용되며, **useReducer**는 복잡한 상태 로직을 다룰 때 유용합니다.<br/>
+> **useContext**는 Context API와 함께 사용되어 컴포넌트 트리를 통한 상태 공유를 간소화합니다.
+>
+> 3. Redux, Recoil 상태 관리 라이브러리<br/><br/>
+> **Recoil**<br>
+> 애플리케이션 전역에서 상태를 관리할 수 있으며, 컴포넌트 간 상태 공유가 용이해집니다.<br/>
+> 특히, 원자(atom)라는 개념을 사용하여 상태의 단위를 정의하고, 선택자(selector)를 통해 상태를 파생시키는 기능을 제공합니다.<br/><br/>
+> **Redux**<br/>
+> 전체 애플리케이션의 상태를 하나의 저장소(store)에서 관리합니다.<br/>
+> 이 저장소는 애플리케이션의 single source of truth으로 작동합니다.<br/>
+> Redux는 액션(action)과 리듀서(reducer)를 사용하여 상태 변화를 관리합니다.<br/>
+> 액션은 상태 변화를 일으키는 사건을 설명하는 객체이며, 리듀서는 이러한 액션을 받아 이전 상태를 새 상태로 변환하는 순수 함수입니다. 
 
-## 미션 목표
 
-- VSCode, Prettier를 이용하여 개발환경을 관리합니다.
-- React의 기초를 이해합니다.
-- React를 통한 어플리케이션 상태 관리 방법을 이해합니다.
-- React Hooks에 대한 기초를 이해합니다.
-- Styled-Components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법을 익힙니다.
+<br/>
 
-## 기한
+**4. Styled-Components 사용 후기 (CSS와 비교)**
+> Styled-Component는 컴포넌트 기반 스타일링으로 똑같은 스타일 속성을 컴포넌트로 재사용하는 것이 편리했습니다.<br/>
+> 또 JavaScript 파일 내에 스타일과 컴포넌트 로직이 함께 있기 때문에,<br/>해당 태그 관련 코드를 찾고 관리하기가 더 쉬워 CSS에 비해 스타일 수정이 빠르고 편리했습니다.<br/>
+> 
+> 하지만 한가지 아쉬운점은 단순히 html 구조를 변경하고 추가할때 스타일속성을 적용하려고 컴포넌트를 생성하고 연결하는 과정이 다소 번거로운 작업이라 생각했습니다.
+<br/>
 
-- 2024년 3월 22일 금요일
 
-## Key Questions
-
-- Virtual-DOM은 무엇이고, 이를 사용함으로서 얻는 이점은 무엇인가요?
-- 미션을 진행하면서 느낀, React를 사용함으로서 얻을수 있는 장점은 무엇이었나요?
-- React에서 상태란 무엇이고 어떻게 관리할 수 있을까요?
-- Styled-Components 사용 후기 (CSS와 비교)
-
-## 필수 요건
-
-- 1주차 미션의 결과물을 그대로 React로 구현합니다. (‼️ todo / done 개수 잊지 마세요 ‼️)
-- Functional Components를 사용합니다.
-- React Hooks만을 사용해 상태를 관리합니다.
-- (이번주는 Redux, MobX, Recoil, SWR등의 외부 상태관리 라이브러리를 사용하지 않아도 미션 수행에 지장이 없습니다.)
-
-## 선택 요건
-
-- 기존 Todo-list에 여러분들이 추가하고 싶은 기능과 디자인을 자유롭게 추가해보세요.
-
-## 로컬 실행방법
-
----
-
-`npm start` : 로컬에서 react application을 자동으로 리로드하여 실행시켜줍니다.
-
-# 링크 및 참고자료
-
----
-
-- [create react app (CRA)](https://create-react-app.dev/docs/getting-started/)
-- [리액트 docs 주요 개념 1-12](https://react.dev/learn)
-- [리액트 docs Hook 1-3](https://react.dev/reference/react)
-- [리액트 useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [컴포넌트 네이밍을 위한 자바스크립트 네이밍 컨벤션](https://velog.io/@cada/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%ED%83%80%EC%9D%BC-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%84%A4%EC%9D%B4%EB%B0%8D-%EC%BB%A8%EB%B2%A4%EC%85%98-%ED%8E%B8)
-- [useState, useEffect hooks](https://velog.io/@velopert/react-hooks#1-usestate)
-- [styled-component](https://styled-components.com/docs/basics#getting-started)
