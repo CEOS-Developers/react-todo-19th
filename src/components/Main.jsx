@@ -17,6 +17,10 @@ const Main = () => {
   };
 
   const handleSubmit = () => {
+    if (!value.trim()) {
+      setValue("");
+      return;
+    }
     setData([
       ...data,
       {
