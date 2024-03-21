@@ -31,6 +31,9 @@ const Main = () => {
     setValue("");
   };
 
+  const doneCount = data.filter((el) => el.isDone).length;
+  const totalCount = data.length;
+
   const toggleTodo = (id) => {
     const updatedData = data.map((el) =>
       el.id === id ? { ...el, isDone: !el.isDone } : el
@@ -60,11 +63,18 @@ const Main = () => {
       </InputWrapper>
 
       <ProgressWrapper>
-        <ProgressText>달려봐요 !</ProgressText>
+        <ProgressText>
+          {totalCount !== 0 && doneCount === totalCount
+            ? "최고예요"
+            : "달려봐요"}{" "}
+          !
+        </ProgressText>
         <ProgressBar>
-          <ProgressBarDone></ProgressBarDone>
+          <ProgressBarDone
+            $ratio={(doneCount / totalCount) * 100}
+          ></ProgressBarDone>
         </ProgressBar>
-        <ProgressCount>0 / 0</ProgressCount>
+        <ProgressCount>{doneCount + " / " + totalCount}</ProgressCount>
       </ProgressWrapper>
 
       <TodoWrapper>
@@ -159,6 +169,7 @@ const ProgressBarDone = styled.span`
   height: inherit;
   position: absolute;
   transition: width 0.4s ease-in-out;
+  width: ${(props) => props.$ratio}%;
 `;
 
 const ProgressCount = styled.span``;
