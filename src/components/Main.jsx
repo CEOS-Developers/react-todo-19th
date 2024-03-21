@@ -5,14 +5,14 @@ import { useState } from "react";
 import TodoItem from "./TodoItem";
 
 const Main = () => {
-  const data = [
+  const [data, setData] = useState([
     { id: 1, content: "샤워하기", isDone: false },
     { id: 2, content: "놀기", isDone: false },
     { id: 3, content: "나는 Done이지롱~", isDone: true },
     { id: 4, content: "룰루랄라", isDone: false },
     { id: 5, content: "먀옹", isDone: true },
     { id: 6, content: "Done~", isDone: true },
-  ];
+  ]);
 
   const [value, setValue] = useState("");
   const handleOnchange = (e) => {
@@ -21,9 +21,17 @@ const Main = () => {
   };
 
   const handleSubmit = () => {
-    // 제출하기
+    setData([
+      ...data,
+      {
+        id: new Date().getTime() + Math.random(),
+        content: value,
+        isDone: false,
+      },
+    ]);
     setValue("");
   };
+
   return (
     <Wrapper>
       <InputWrapper>
