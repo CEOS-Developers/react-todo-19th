@@ -155,4 +155,5 @@ const Title = styled.h3`
 const TodoList = styled.ul`
   display: grid;
   row-gap: 10px;
+  padding: 0 5px;
 `;
