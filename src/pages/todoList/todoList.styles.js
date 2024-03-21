@@ -1,7 +1,40 @@
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { ReactComponent as NotCheckImg } from "../../assets/NotCheck.svg";
 import { ReactComponent as CheckImg } from "../../assets/checkComplete.svg";
 import { ReactComponent as InputCheck } from "../../assets/check.svg";
+
+const slideDownFadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// 할 일 삭제 시 애니메이션
+const fadeOutScaleDown = keyframes`
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+`;
+
+const animationStyles = css`
+  &.animate-slide-down {
+    animation: ${slideDownFadeIn} 0.3s ease-out;
+  }
+
+  &.animate-fade-out {
+    animation: ${fadeOutScaleDown} 0.3s ease-out;
+  }
+`;
 
 export const NotCheck = styled(NotCheckImg)`
   width: 25px;
@@ -197,6 +230,8 @@ export const TodoListLi = styled.li`
   margin: 5px 0px;
   padding: 0 15px 0 15px;
   color: #cdcdcd;
+
+  ${animationStyles}
 
   @media (max-width: 768px) {
     height: 45px;

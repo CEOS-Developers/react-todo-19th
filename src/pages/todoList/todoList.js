@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import * as T from "./todoList.styles";
 
 export default function TodoListPage() {
-  // const [todoNum, setTodoNum] = useState(0);
-  // const [doneTodoNum, setDoneTodoNum] = useState(0);
   const [todo, setTodo] = useState("");
   const [todoList, setTodoList] = useState(() => {
     // 로컬스토리지에서 할일 불러오기
     const savedTodo = localStorage.getItem("todoItem");
     return savedTodo ? JSON.parse(savedTodo) : [];
   });
+  // 애니메이션 추가,삭제를 위한 인덱스
+  const [addedItemId, setAddedItemId] = useState(null);
+  const [deleteIndexAnimation, setDeleteIndexAnimation] = useState(null);
 
   // 오늘 날짜
   const today = new Date().toISOString().slice(0, 10);
@@ -27,7 +28,8 @@ export default function TodoListPage() {
     event.preventDefault();
     if (!todo.trim()) return;
 
-    const newTodo = { text: todo, checked: false };
+    const newTodo = { id: Date.now(), text: todo, checked: false };
+    setAddedItemId(newTodo.id);
     setTodoList([newTodo, ...todoList]);
 
     // todo 상태 초기화
@@ -35,11 +37,13 @@ export default function TodoListPage() {
   };
 
   const onClickDelete = (event) => {
-    setTodoList(
-      todoList.filter(
-        (_, index) => index !== parseInt(event.currentTarget.value),
-      ),
-    );
+    const indexToDelete = parseInt(event.currentTarget.value, 10);
+
+    setDeleteIndexAnimation(indexToDelete); // 삭제 애니메이션 시작
+    setTimeout(() => {
+      setTodoList(todoList.filter((_, index) => index !== indexToDelete));
+      setDeleteIndexAnimation(null); // 애니메이션 후 상태 업데이트
+    }, 300); // setTimeout의 시간은 애니메이션의 지속 시간과 일치해야 합니다.
   };
 
   const onClickToggle = (currentIndex) => {
@@ -90,7 +94,11 @@ export default function TodoListPage() {
         {/*  todo list  */}
         <T.TodoList>
           {todoList?.map((item, index) => (
-            <T.TodoListLi key={index}>
+            <T.TodoListLi
+              key={item.id}
+              value={index}
+              className={`${item.id === addedItemId ? "animate-slide-down" : ""} ${deleteIndexAnimation === index ? "animate-fade-out" : ""}`}
+            >
               {item.checked ? (
                 <>
                   <T.Check onClick={() => onClickToggle(index)} />
