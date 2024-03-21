@@ -91,13 +91,21 @@ export default function TodoListPage() {
           {todoList?.map((item, index) => (
             <T.TodoListLi key={index}>
               {item.checked ? (
-                <div value={index}>
+                <>
                   <T.Check onClick={() => onClickToggle(index)} />
-                </div>
+                  <T.TodoListSpan
+                    style={{ textDecoration: "line-through", color: "#808080" }}
+                  >
+                    {item.text}
+                  </T.TodoListSpan>
+                </>
               ) : (
-                <T.NotCheck onClick={() => onClickToggle(index)} />
+                <>
+                  <T.NotCheck onClick={() => onClickToggle(index)} />
+                  <T.TodoListSpan>{item.text}</T.TodoListSpan>
+                </>
               )}
-              <T.TodoListSpan>{item.text}</T.TodoListSpan>
+
               <T.TodoListBtn
                 type="button"
                 onClick={onClickDelete}

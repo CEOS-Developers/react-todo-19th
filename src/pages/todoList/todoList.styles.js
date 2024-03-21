@@ -4,8 +4,8 @@ import { ReactComponent as CheckImg } from "../../assets/checkComplete.svg";
 import { ReactComponent as InputCheck } from "../../assets/check.svg";
 
 export const NotCheck = styled(NotCheckImg)`
-  width: 29px;
-  height: 29px;
+  width: 25px;
+  height: 25px;
 
   cursor: pointer;
 `;
