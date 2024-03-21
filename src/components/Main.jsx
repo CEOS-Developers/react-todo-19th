@@ -38,6 +38,11 @@ const Main = () => {
     setData(updatedData);
   };
 
+  const deleteTodo = (id) => {
+    const updatedData = data.filter((el) => el.id !== id);
+    setData(updatedData);
+  };
+
   return (
     <Wrapper>
       <InputWrapper>
@@ -69,7 +74,12 @@ const Main = () => {
             {data.map(
               (el) =>
                 el.isDone || (
-                  <TodoItem key={el.id} item={el} toggleTodo={toggleTodo} />
+                  <TodoItem
+                    key={el.id}
+                    item={el}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                  />
                 )
             )}
           </TodoList>
@@ -81,7 +91,12 @@ const Main = () => {
             {data.map(
               (el) =>
                 el.isDone && (
-                  <TodoItem key={el.id} item={el} toggleTodo={toggleTodo} />
+                  <TodoItem
+                    key={el.id}
+                    item={el}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                  />
                 )
             )}
           </TodoList>

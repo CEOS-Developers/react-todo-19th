@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 
-const TodoItem = ({ item, toggleTodo }) => {
+const TodoItem = ({ item, toggleTodo, deleteTodo }) => {
   return (
     <Wrapper>
       <TodoContent onClick={() => toggleTodo(item.id)}>
         {item.content}
       </TodoContent>
-      <DeleteBtn>
+      <DeleteBtn onClick={() => deleteTodo(item.id)}>
         <FontAwesomeIcon icon={faCircleXmark} size="lg" />
       </DeleteBtn>
     </Wrapper>
