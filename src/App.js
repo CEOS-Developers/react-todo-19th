@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Section from './Section';
 
@@ -35,38 +35,49 @@ function App() {
   const [sections, setSections] = useState([]);
   const [sectionName, setSectionName] = useState('');
 
+  // 로컬 스토리지에서 섹션 데이터 불러오기
+  useEffect(() => {
+    const storedSections = JSON.parse(localStorage.getItem('sections')) || [];
+    setSections(storedSections);
+  }, []);
+
+  // 섹션 또는 할 일이 변경될 때마다 로컬 스토리지 업데이트
+  useEffect(() => {
+    localStorage.setItem('sections', JSON.stringify(sections));
+  }, [sections]);
+
   const addSection = () => {
     const newSection = {
-      id: Date.now(), // 현재 시간을 기준으로 고유한 ID 생성
+      id: Date.now(),
       name: sectionName,
       todos: []
     };
-    setSections([...sections, newSection]);
-    setSectionName(''); // 입력 필드 초기화
+    setSections(prevSections => [...prevSections, newSection]);
+    setSectionName('');
   };
 
   const deleteSection = (sectionId) => {
-    setSections(sections.filter(section => section.id !== sectionId));
+    setSections(prevSections => prevSections.filter(section => section.id !== sectionId));
   };
 
   const addTodo = (sectionId, todoText) => {
-    setSections(sections.map(section => {
-      if (section.id === sectionId) {
-        const newTodo = { id: Date.now(), text: todoText };
-        return { ...section, todos: [...section.todos, newTodo] };
-      }
-      return section;
-    }));
+    setSections(prevSections =>
+      prevSections.map(section =>
+        section.id === sectionId
+          ? { ...section, todos: [...section.todos, { id: Date.now(), text: todoText }] }
+          : section
+      )
+    );
   };
 
   const deleteTodo = (sectionId, todoId) => {
-    setSections(sections.map(section => {
-      if (section.id === sectionId) {
-        const filteredTodos = section.todos.filter(todo => todo.id !== todoId);
-        return { ...section, todos: filteredTodos };
-      }
-      return section;
-    }));
+    setSections(prevSections =>
+      prevSections.map(section =>
+        section.id === sectionId
+          ? { ...section, todos: section.todos.filter(todo => todo.id !== todoId) }
+          : section
+      )
+    );
   };
 
   return (
@@ -75,10 +86,10 @@ function App() {
         type="text"
         placeholder="새 섹션 이름"
         value={sectionName}
-        onChange={(e) => setSectionName(e.target.value)}
+        onChange={e => setSectionName(e.target.value)}
       />
       <Button onClick={addSection}>섹션 추가</Button>
-      {sections.map((section) => (
+      {sections.map(section => (
         <Section
           key={section.id}
           section={section}
