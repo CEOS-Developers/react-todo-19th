@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { flexCenter, flexColumn } from 'styles/commonStyle';
+import { v4 as uuidv4 } from 'uuid';
 
-function TodoCreate({ addTodo }) {
+function TodoCreate({ dispatch }) {
   const [inputValue, setInputValue] = useState('');
   const [isError, setIsError] = useState(false);
 
@@ -13,9 +14,12 @@ function TodoCreate({ addTodo }) {
       return;
     }
 
-    addTodo({
-      id: Math.floor(Math.random() * 1000), // 임의의 ID 생성 (실제로는 고유한 ID를 사용해야 함)
-      text: inputValue,
+    dispatch({
+      type: 'ADD_TODO',
+      payload: {
+        id: uuidv4(),
+        text: inputValue,
+      },
     });
 
     setIsError(false);

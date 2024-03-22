@@ -1,15 +1,26 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { flexColumn } from 'styles/commonStyle';
 
-function TodoList({ listName, list }) {
+function TodoList({ listName, list, dispatch }) {
+  const handleClick = ({ id, text }) => {
+    if (listName === 'todo') {
+      dispatch({ type: 'MOVE_TODO_TO_DONE', payload: { id, text } });
+    } else {
+      dispatch({ type: 'MOVE_DONE_TO_TODO', payload: { id, text } });
+    }
+  };
+
   return (
     <TodoListWrapper>
       <h2>
-        {listName} <span> / 0개</span>
+        {listName} <span> / {list.length}개</span>
       </h2>
       <ul className="list">
         {list.map((li) => (
-          <li key={li.id}>{li.text}</li>
+          <li key={li.id} onClick={() => handleClick({ id: li.id, text: li.text })}>
+            {li.text}
+          </li>
         ))}
       </ul>
     </TodoListWrapper>
@@ -33,6 +44,10 @@ const TodoListWrapper = styled.article`
     ${flexColumn}
     gap: 1rem;
     overflow: auto;
+
+    li {
+      cursor: pointer;
+    }
   }
 
   & {

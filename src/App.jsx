@@ -16,13 +16,11 @@ const todoReducer = (state, action) => {
       return { ...state, todoList: [...state.todoList, action.payload] };
     case 'MOVE_TODO_TO_DONE':
       return {
-        ...state,
         todoList: state.todoList.filter((todo) => todo.id !== action.payload.id),
         doneList: [...state.doneList, action.payload],
       };
     case 'MOVE_DONE_TO_TODO':
       return {
-        ...state,
         doneList: state.doneList.filter((todo) => todo.id !== action.payload.id),
         todoList: [...state.todoList, action.payload],
       };
@@ -39,18 +37,14 @@ function App() {
   const [state, dispatch] = useReducer(todoReducer, initialState);
   const { todoList, doneList } = state;
 
-  const addTodo = (todo) => {
-    dispatch({ type: 'ADD_TODO', payload: todo });
-  };
-
   return (
     <TodoAppLayout>
       <TodoHeader />
       <TodoMain>
-        <TodoCreate addTodo={addTodo} />
+        <TodoCreate dispatch={dispatch} />
         <TodoListContainer>
-          <TodoList listName="Todo" list={todoList} dispatch={dispatch} />
-          <TodoList listName="Done" list={doneList} dispatch={dispatch} />
+          <TodoList listName="todo" list={todoList} dispatch={dispatch} />
+          <TodoList listName="done" list={doneList} dispatch={dispatch} />
         </TodoListContainer>
       </TodoMain>
     </TodoAppLayout>
