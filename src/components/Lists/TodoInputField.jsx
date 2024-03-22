@@ -33,6 +33,7 @@ const SubmitButton = styled.button`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 `
 
 function TodoInputField({ lists, setLists, value, setValue}) {

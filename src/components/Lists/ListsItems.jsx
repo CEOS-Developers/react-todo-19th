@@ -30,6 +30,7 @@ export const button = css`
   width: 1.2rem;
   height: 1.2rem;
   margin: auto 1rem auto 0rem;
+  cursor: pointer;
 `
 
 const DeleteButton = styled.img`
