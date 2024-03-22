@@ -20,15 +20,15 @@ const TodoText = styled.div`
   display: flex;
   align-items: center;
   flex-grow: 1;
-  margin: 1.4rem 0;
+  margin: 1.2rem 0;
   padding: 0 1rem;
   font-size: 1.2rem;
   font-weight: normal;
   word-break:break-all;
 `
 export const button = css`
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.2rem;
+  height: 1.2rem;
   margin: auto 1rem auto 0rem;
 `
 

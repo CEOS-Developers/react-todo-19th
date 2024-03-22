@@ -4,7 +4,6 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/ko'
 dayjs.locale('ko')
 
-//styles
 const DateWrapper = styled.div`
   width: 100%;
   height: 8.583rem;

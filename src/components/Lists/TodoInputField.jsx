@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
 import styled from 'styled-components'
 import dayjs from 'dayjs'
 
 const TodoInputFieldWrapper = styled.form`
-    height: 3.9rem;
+    height: 3.5rem;
     width: 90%;
     display: flex;
     flex-direction: row;

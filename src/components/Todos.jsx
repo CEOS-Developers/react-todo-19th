@@ -6,6 +6,7 @@ import TodoInputField from './Lists/TodoInputField';
 import { useState } from 'react';
 import ListsItems from './Lists/ListsItems';
 //전체 틀 잡기
+
 const TodoContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -24,7 +25,7 @@ export const textCenter = css`
     width: 90%;
     display: flex;
     align-items: center;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: normal;
 `
 
@@ -32,7 +33,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 38rem;
+    height: 54vh;
 `
 
 const TodoLists = styled.div`
@@ -48,7 +49,7 @@ const DoneLists = styled.div`
      ${textCenter}
      color: black;
      margin: 0 auto;
-     height: 4.5rem;
+     height: 3.6rem;
     }
 `
 
