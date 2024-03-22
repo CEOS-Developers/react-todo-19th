@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { flexCenter, flexColumn } from 'styles/commonStyle';
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 function TodoCreate({ dispatch }) {
   const [inputValue, setInputValue] = useState('');
@@ -17,7 +17,7 @@ function TodoCreate({ dispatch }) {
     dispatch({
       type: 'ADD_TODO',
       payload: {
-        id: uuidv4(),
+        id: uuid(),
         text: inputValue,
       },
     });

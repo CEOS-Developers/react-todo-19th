@@ -15,22 +15,33 @@ const todoReducer = (state, action) => {
     case 'ADD_TODO':
       return { ...state, todoList: [...state.todoList, action.payload] };
     case 'MOVE_TODO_TO_DONE':
-      return {
-        todoList: state.todoList.filter((todo) => todo.id !== action.payload.id),
-        doneList: [...state.doneList, action.payload],
-      };
+      return moveItem(state, action.payload, 'todoList', 'doneList');
     case 'MOVE_DONE_TO_TODO':
-      return {
-        doneList: state.doneList.filter((todo) => todo.id !== action.payload.id),
-        todoList: [...state.todoList, action.payload],
-      };
+      return moveItem(state, action.payload, 'doneList', 'todoList');
     case 'REMOVE_TODO':
-      return { ...state, todoList: state.todoList.filter((todo) => todo.id !== action.payload) };
+      return removeItem(state, action.payload, 'todoList');
     case 'REMOVE_DONE':
-      return { ...state, doneList: state.doneList.filter((todo) => todo.id !== action.payload) };
+      return removeItem(state, action.payload, 'doneList');
     default:
       return state;
   }
+};
+
+const moveItem = (state, payload, fromListName, toListName) => {
+  const { id } = payload;
+
+  return {
+    [fromListName]: state[fromListName].filter((todo) => todo.id !== id),
+    [toListName]: [...state[toListName], payload],
+  };
+};
+
+const removeItem = (state, payload, listName) => {
+  const { id } = payload;
+  return {
+    ...state,
+    [listName]: state[listName].filter((todo) => todo.id !== id),
+  };
 };
 
 function App() {
