@@ -1,24 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DateBar from "./DateBar";
 import AddButton from "../buttons/AddButton";
 import DoneButton from "../buttons/DoneButton";
 import TrashButton from "../buttons/TrashButton";
 import ResetButton from "../buttons/ResetButton";
-import TodoList from "../lists/TodoList";
+import TodoList from "./TodoList";
 import ProgressBar from "../progress/ProgressBar";
+import ProgressStatusNumber from "../progress/ProgressStatusNumber";
 
 const MainPage = () => {
     const [inputValue, setInputValue] = useState("");
-    const [items, setItems] = useState([]); // 할 일 목록
-    const [completedItems, setCompletedItems] = useState([]); // 완료 목록
+    const [items, setItems] = useState(() => {
+      const savedItems = localStorage.getItem("items");
+      return savedItems ? JSON.parse(savedItems) : [];
+    });
+    const [completedItems, setCompletedItems] = useState(() => {
+      const savedCompletedItems = localStorage.getItem("completedItems");
+      return savedCompletedItems ? JSON.parse(savedCompletedItems) : [];
+    });    
     const [selectedIds, setSelectedIds] = useState([]);
-    
-    const handleInputChange = e => setInputValue(e.target.value);
     const totalItems = items.length + completedItems.length;
     const completedCount = completedItems.length;
 
 
+   //로컬스토리지에 저장
+    useEffect(() => {
+      localStorage.setItem("items", JSON.stringify(items));
+    }, [items]);
+
+    useEffect(() => {
+      localStorage.setItem("completedItems", JSON.stringify(completedItems));
+    }, [completedItems]);
+
+
+    const handleInputChange = e => setInputValue(e.target.value);
+
+    
     const handleAddTodo = () => {
         if (!inputValue.trim()) return;
         const newTodo = { id: Date.now(), text: inputValue, isCompleted: false, isSelected: false };
@@ -62,20 +80,19 @@ const MainPage = () => {
     };
     
 
-    // 할일 목록이랑 완료 목록 합치기
-    const displayItems = [...items, ...completedItems];
-
-
     return (
         <PageContainer>
-            <ContentContaner>
+            <ContentContainer>
                 <Header>
-                        <Title>투두리스트</Title>
-                        <ProgressStatusNumber/>
-                    <DateBar/>
+                  <TitleWrapper>
+                    <Title>투두리스트</Title>
+                    <ProgressStatusNumber totalItems={totalItems} completedCount={completedCount} />
+                  </TitleWrapper>
+                  <DateBar/>
                 </Header>
                 <InputContainer>
                     <TodoInput 
+                    autoFocus //input 칸에 자동 포커싱하기!!
                     type="text" 
                     placeholder="오늘의 할일..." 
                     value={inputValue} // 입력값 상태
@@ -88,13 +105,18 @@ const MainPage = () => {
                 <ButtonContainer>
                     <TrashButton onClick={handleDeleteTodo}/>
                     <DoneButton onClick={handleCompleteTodo} />  
-                    <ResetButton onClick={handleReset} />                 </ButtonContainer>
-                <TodoList items={displayItems} selectedIds={selectedIds} onToggleSelect={toggleSelectTodo} />
+                    <ResetButton onClick={handleReset} />                 
+                </ButtonContainer>
+                <TodoList 
+                selectedIds={selectedIds} 
+                todoList={items}
+                completedList={completedItems}
+                onToggleSelect={toggleSelectTodo} />
                 <Footer>
-                <ProgressBar totalItems={totalItems} completedItems={completedCount} />            
+                  <ProgressBar totalItems={totalItems} completedItems={completedCount} />            
                 </Footer>
-                </ContentContaner>
-        </PageContainer>
+            </ContentContainer>
+      </PageContainer>
     )
 }
 
@@ -113,7 +135,7 @@ justify-content: center;
 overflow-y: auto;
 
 
-//스크롤바 커스텀
+//스크롤바 
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -131,7 +153,7 @@ overflow-y: auto;
   
 `;
 
-const ContentContaner = styled.body`
+const ContentContainer = styled.section`
 width: 50%;
 min-width: 260px; //padding 계산해서 최소 너비 설정
 height: 60%;
@@ -139,11 +161,10 @@ max-width: 500px;
 min-height: 420px;  //padding 계산해서 최소 높이 설정
 padding: 50px 20px 30px 20px;
 background-color: #fff;
-border-radius: 10px;
+border-radius: 15px;
 display: flex;
 flex-direction: column;
 align-items: center;
-
 `;
 const Header = styled.div`
  width: 70%
@@ -155,9 +176,12 @@ font-size: 25px;
 font-weight: 800;
 `;
 
-const ProgressStatusNumber = styled.span`
- 
-`;
+const TitleWrapper = styled.span`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+`
 
 const InputContainer = styled.div`
 width: 70%;
@@ -175,7 +199,10 @@ color: ${props => props.hasContent ? '#4A90E2' : '#000'};
 font-family: 'SUIT-Regular';
 font-size: 12px;
 margin-right: 10px; 
+-webkit-appearance: none; //사파리에서,,,
+-moz-appearance: none;
 
+appearance: none;
 &:focus {
     outline: none; 
     border-bottom: 1.5px solid ${props => props.hasContent ? '#4A90E2' : '#ccc'};
