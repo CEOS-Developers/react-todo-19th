@@ -125,3 +125,7 @@ React로 코드를 작성하며 직접적으로 느낀 장점은 1, 4번입니�
 
 - `CSS`가 `JS`에 들어가 있기 때문에, 동적 스타일링이 간단하다.
 - No-class coding: 구현 시 클래스명이 임의로 부여된다.
+
+## 🔗 참고 자료
+
+- [Vite 프로젝트 Vercel 배포하기](https://velog.io/@j2yn34/ReactTypescriptVite-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Vercel-%EB%B0%B0%ED%8F%AC)
