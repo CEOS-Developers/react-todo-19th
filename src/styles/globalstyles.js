@@ -7,6 +7,10 @@ export const device = {
 
 export const GlobalStyle = createGlobalStyle`
 
+body{
+  background: #f0f6ff;
+}
+
 @font-face {
   font-family: 'meetme';
   src: url(${MeetmeRegular}) format('woff');
