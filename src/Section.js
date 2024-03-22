@@ -24,30 +24,32 @@ const Title = styled.h3``;
 
 const Input = styled.input`
 	margin-right: 10px;
+    margin-bottom:10px;
 	padding: 10px;
 	border-radius: 5px;
 	border: 1px solid #ccc;
 `;
 
 const Button = styled.button`
-	padding: 10px 20px;
+	padding: 8px 16px;
 	margin: 5px;
-	border-radius: 5px;
-	background-color: #007bff;
-	color: white;
-	border: none;
+	border-radius: 10px;
+  border:none;
+	background-color: #f7f7f7;
+	color: black;
+  font-size:17px;
 	cursor: pointer;
 
 	&:hover {
-		background-color: #0056b3;
+		background-color: #dedede;
 	}
 `;
 
 const DeleteSectionButton = styled(Button)`
-	background-color: #007bff;
+	background-color: #f7f7f7;
 
 	&:hover {
-		background-color: #0056b3;
+		background-color: #dedede;
 	}
 `;
 
@@ -65,17 +67,10 @@ function Section({ section, onDeleteSection, addTodo, deleteTodo, onToggleComple
         <TitleBar>
           <Title>{section.name}</Title>
           <DeleteSectionButton onClick={() => onDeleteSection(section.id)}>
-            섹션 삭제
+            섹션 🗑️
           </DeleteSectionButton>
         </TitleBar>
         <div>
-          <Input
-            type="text"
-            placeholder="할 일 추가"
-            value={todoText}
-            onChange={(e) => setTodoText(e.target.value)}
-          />
-          <Button onClick={handleAddTodo}>추가</Button>
         </div>
         {section.todos.map((todo) => (
           <TodoItem
@@ -84,7 +79,17 @@ function Section({ section, onDeleteSection, addTodo, deleteTodo, onToggleComple
             onDelete={() => deleteTodo(section.id, todo.id)}
             onToggleCompleted={() => onToggleCompleted(section.id, todo.id)}
           />
+          
         ))}
+        <div>
+        <Input
+            type="text"
+            placeholder="할 일 추가"
+            value={todoText}
+            onChange={(e) => setTodoText(e.target.value)}
+          />
+          <Button onClick={handleAddTodo}> 📥</Button>
+          </div>
       </SectionContainer>
     );
   }

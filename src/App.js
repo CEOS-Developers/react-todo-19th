@@ -12,7 +12,7 @@ const AppContainer = styled.div`
 `;
 
 const Input = styled.input`
-	margin: 10px;
+	margin: 5px;
 	padding: 10px;
 	border-radius: 5px;
 	border: 1px solid #ccc;
@@ -21,14 +21,15 @@ const Input = styled.input`
 const Button = styled.button`
 	padding: 10px 20px;
 	margin: 5px;
-	border-radius: 5px;
-	background-color: #007bff;
-	color: white;
-	border: none;
+	border-radius: 15px;
+  border:none;
+	background-color: #f7f7f7;
+	color: black;
+  font-size:20px;
 	cursor: pointer;
 
 	&:hover {
-		background-color: #0056b3;
+		background-color: #dedede;
 	}
 `;
 
@@ -99,8 +100,6 @@ function App() {
 		);
 	};
 
-	// toggleTodoCompleted 함수만 추가된 부분을 보여줍니다.
-
 	const toggleTodoCompleted = (sectionId, todoId) => {
 		setSections((prevSections) =>
 			prevSections.map((section) =>
@@ -137,9 +136,9 @@ function App() {
 	return (
 		<AppContainer>
 			<GlobalStyle />
-			<SummaryText>{today} </SummaryText>
+			<SummaryText>⏰  {today}</SummaryText>
 			<CountText>
-				남은 할 일: {remainingTodos}개, 완료된 할 일: {completedTodos}개
+      ❎ : {remainingTodos}개, ✅ : {completedTodos}개
 			</CountText>
 			<Input
 				type='text'
@@ -147,7 +146,7 @@ function App() {
 				value={sectionName}
 				onChange={(e) => setSectionName(e.target.value)}
 			/>
-			<Button onClick={addSection}>섹션 추가</Button>
+			<Button onClick={addSection}>섹션 📥</Button>
 			{sections.map((section) => (
 				<Section
 					key={section.id}
