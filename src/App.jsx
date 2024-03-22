@@ -1,13 +1,13 @@
 import TodoCreate from 'components/TodoCreate';
 import TodoHeader from 'components/TodoHeader';
 import TodoList from 'components/TodoList';
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import styled from 'styled-components';
 import { flexCenter, flexColumn } from 'styles/commonStyle';
 
 const initialState = {
-  todoList: [],
-  doneList: [],
+  todoList: JSON.parse(localStorage.getItem('todoList')) || [],
+  doneList: JSON.parse(localStorage.getItem('doneList')) || [],
 };
 
 const todoReducer = (state, action) => {
@@ -48,11 +48,19 @@ function App() {
   const [state, dispatch] = useReducer(todoReducer, initialState);
   const { todoList, doneList } = state;
 
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
+
+  useEffect(() => {
+    localStorage.setItem('doneList', JSON.stringify(doneList));
+  }, [todoList]);
+
   return (
     <TodoAppLayout>
       <TodoHeader />
       <TodoMain>
-        <TodoCreate dispatch={dispatch} />
+        <TodoCreate list={todoList} dispatch={dispatch} />
         <TodoListContainer>
           <TodoList listName="todo" list={todoList} dispatch={dispatch} />
           <TodoList listName="done" list={doneList} dispatch={dispatch} />
