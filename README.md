@@ -1,68 +1,66 @@
-# 2주차 미션: React-Todo
+## 🔗 배포 링크
 
-# 서론
+[https://react-todo-19th-psi.vercel.app/](https://react-todo-19th-psi.vercel.app/)
 
-안녕하세요 🙌🏻 19기 프론트엔드 운영진 **변지혜**입니다.
+## 🕶️ 기능구현
 
-다들 1주차 미션 Vanilla Todo 만드시느라 수고 많으셨습니다! 1주차 미션을 통해 여러분들께서 본격적인 React 사용에 앞서 Vanilla JS로 SPA를 만들때의 불편한 점을 느끼셨을 것 이라 생각합니다.
+![screenshot](./public/img/screenshot.png)
 
-그리하여 이번 미션은, 1주차 스터의 미션으로 주어진 Todo list 만들기를 **React**로 리팩토링하는 것 입니다!
-기존에 리액트를 잘 아시던 분들께는, 조금 더 효울적인 디자인 패턴에 대해 고민할수 있는 주차가 될 것이고, 리액트를 제대로 접해보지 못하신 분들께는 기존의 어플리케이션을 리액트로 포팅하는 과정을 통해 왜 프론트엔드 시장에 리액트가 등장하게 되었고, 리액트에서 사용하는 여러가지 방식들이 왜 바닐라에 비해 효율적인지 꺠닫는 주차가 될 것이라 생각합니다.
+- todo 추가하기
+- local storage 구현
+- check버튼 클릭시 todo ↔ done으로 이동
+- delete버튼 클릭시 local storage에서 삭제
+- text overflow 관리
+- scroll 가능
 
-비교적 가벼운 미션인 만큼 코드를 짜는 데 있어 여러분의 **창의성**을 충분히 발휘해보시기 바랍니다. _❕작동하기만 하면 되는 것보다 같은 코드를 짜는 여러가지 방식과 패턴에 대해 많이 고민해보시고, 본인이 작성할 수 있는 가장 창의적인 방법으로 코드를 작성해주셨으면 합니다.❕_ 여러분이 미션 수행을 하는 과정에서 한 생각과 고민만큼 스터디에서 더 많은 것을 얻어가실 수 있을 거라 기대합니다!
+## 👩‍💻 느낀점
 
-막히는 부분이 있더라도 우선 스스로 공부하고 찾아보면서 미션을 진행하는 방식을 권고드리지만, 미션과 관련하여 운영진의 도움이 필요하시다면 얼마든지 슬랙 Q&A 채널이나 프론트엔드 카톡방에 질문을 남겨 주세요!
+지난 미션에서 local storage를 포함해서 여러가지 구현하지 못해 아쉬웠던 점을 많이 보완하고자 노력했습니다..! local storage로 데이터를 다루다 보니까 배열 형태를 가공하는 것이 많이 어려워서 헤매다 보니 시간이 부족해서 다른 분들의 코드를 많이 참고했습니다. 여전히 기능을 구현하는 것에 더 집중 해야겠다고 다짐했습니다. 리액트가 더 편할거라고 생각했는데 hook과 친해지지 못해서인지 오히려 더 어려웠던 미션이었습니다..🥹
 
-# 미션
+## 👻 어려웠던점
 
-## 예시
+1. deleteTodo() 가 toggleTodo() 이후에 불려오면 에러가 남
+deleteTodo 함수가 filter를 통해 새롭게 배열을 반환해주기 때문에 이 함수가 먼저 오면 undefined가 뜸.
+따라서 useEffect를 통해 직접 제어해 줄 수 있으면 더 좋았을거라고 생각하지만, 정확한 구현은 하지 못해 생각을 더 해보아야 할 것 같다. 배열 자체를 todolist에 들어갈 것과 donelist에 들어갈것으로 나누어서 아예 분리된 배열을 만드는 것도 고려해 봤지만, 로컬스토리지 크기 자체가 작아서 효율적이지 않다고 생각함.
+2. deleteTodo함수에서 직접 배열 인덱스를 찾아서 slice하는 방법도 고민해보고 직접 구현해 보았지만, 인덱스로 찾게되면 매번 마운팅 될 때 마다 id 값이 일치하는 것을 찾고, 또 인덱스 값을 매번 계산하게 되어 여러번의 순차탐색을 하게되므로 효율성이 떨어진다고 생각함.
+3. 아직 props와 친해지지 못해서 ToDo 컴포넌트에 거의 모든 기능을 몰아넣고 자식 컴포넌트에 하나하나 props로 전달하는 방법만 썼으나, 좀더 효율적인 컴포넌트 구성을 고민하고 배치하여 한 컴포넌트에 하나의 기능이 들어갈 수 있게 재사용성이 좋은 컴포넌트를 만들어야겠다고 반성함.
+4. 막상 html에서 react로 넘어가니 익숙하지 않았다. useState 뿐 아니라 useEffect로도 관리 할 수 있었으면 훨씬 좋았을 것 같다.
+5. 사소한 부분이지만, 날짜를 가져오는 라이브러리도 많이 쓰이던 moment.js는 잘 안쓰이는 추세이고 훨씬 가벼운 days 라이브러리를 사용했다. 포맷 변환도 어려웠는데 days는 한국어도 지원하기 때문에 days github 를 참고해서 포맷하면 유용하다.
 
-- [리액트 투두 예시](https://react-todo-18th-lemon.vercel.app/)
+## 🔑 key questions
 
-## 미션 목표
+<aside>
+1️⃣ **Virtual-DOM은 무엇이고, 이를 사용함으로서 얻는 이점은 무엇인가요?**
 
-- VSCode, Prettier를 이용하여 개발환경을 관리합니다.
-- React의 기초를 이해합니다.
-- React를 통한 어플리케이션 상태 관리 방법을 이해합니다.
-- React Hooks에 대한 기초를 이해합니다.
-- Styled-Components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법을 익힙니다.
+리액트에서는 virtual-DOM을 사용한다. virtual-DOM이란, 실제 DOM(Document Object Model)을 조작하는 방식이 아닌, 실제 DOM을 모방한 가상의 DOM을 구성해 원래 DOM과 비교하여 달라진 부분을 리렌더링 하는 방식으로 작동한다.
+실제 DOM에는 브라우저가 화면을 그리는데 필요한 모든 정보가 들어있기 때문에 속도가 느리다는 단점이 있다. 리액트는 깜빡거림 없이 부드러운 UX를 사용자에게 제공하고자 변경사항만 빠르게 파악하고 리렌더링 하기 위해 DOM을 만들어 비교한다. 리액트는 성능 향상을 위해 실제 렌더링된 UI를 내부적으로 자바스크립트 객체로 따로 관리한다.
 
-## 기한
+![virtualDom](./public/img/virtualDom.png)
 
-- 2024년 3월 22일 금요일
+</aside>
 
-## Key Questions
+<aside>
+2️⃣ **미션을 진행하면서 느낀, React를 사용함으로서 얻을수 있는 장점은 무엇이었나요?
 
-- Virtual-DOM은 무엇이고, 이를 사용함으로서 얻는 이점은 무엇인가요?
-- 미션을 진행하면서 느낀, React를 사용함으로서 얻을수 있는 장점은 무엇이었나요?
-- React에서 상태란 무엇이고 어떻게 관리할 수 있을까요?
-- Styled-Components 사용 후기 (CSS와 비교)
+1. virtual-DOM을 통해 리액트를 사용하지 않았을 때 보다 훨씬 빠른 렌더링이 가능했다. 
+2. 기존에는 append를 통해 리스트를 관리했다면, 리액트는 list 하나를 컴포넌트로 빼두어서 더 쉽게 관리할 수 있었다.
+3. 기능별 또는 페이지 별로 컴포넌트로 관리해서 오류를 고칠 때 훨씬 쉽게 오류가 난 부분을 찾을 수 있었다.
+4. 라이브러리 적용이 쉽고 props로 빼두어 코드가 훨씬 간결해졌다.
 
-## 필수 요건
+</aside>
 
-- 1주차 미션의 결과물을 그대로 React로 구현합니다. (‼️ todo / done 개수 잊지 마세요 ‼️)
-- Functional Components를 사용합니다.
-- React Hooks만을 사용해 상태를 관리합니다.
-- (이번주는 Redux, MobX, Recoil, SWR등의 외부 상태관리 라이브러리를 사용하지 않아도 미션 수행에 지장이 없습니다.)
+<aside>
+3️⃣ **React에서 상태란 무엇이고 어떻게 관리할 수 있을까요?**
 
-## 선택 요건
+컴포넌트 내부에서 변할수 있는 값이다. 상태는 React State로 다룰 수 있다.
 
-- 기존 Todo-list에 여러분들이 추가하고 싶은 기능과 디자인을 자유롭게 추가해보세요.
+![state](./public/img/state.png)
 
-## 로컬 실행방법
+</aside>
 
----
+<aside>
+3️⃣ **Styled-Components 사용 후기 (CSS와 비교)**
 
-`npm start` : 로컬에서 react application을 자동으로 리로드하여 실행시켜줍니다.
+가장 먼저 자주 쓰는 스타일을 props로 처리할 수 있다는 점이 가장 좋았다. 그 외에도 default 스타일을 적용하고 특정 컴포넌트에만 약간 변형된 스타일을 적용 할 수 있다는 것도 배웠는데, 아직 사용 해 보지는 못했다.
 
-# 링크 및 참고자료
-
----
-
-- [create react app (CRA)](https://create-react-app.dev/docs/getting-started/)
-- [리액트 docs 주요 개념 1-12](https://react.dev/learn)
-- [리액트 docs Hook 1-3](https://react.dev/reference/react)
-- [리액트 useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [컴포넌트 네이밍을 위한 자바스크립트 네이밍 컨벤션](https://velog.io/@cada/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%ED%83%80%EC%9D%BC-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%84%A4%EC%9D%B4%EB%B0%8D-%EC%BB%A8%EB%B2%A4%EC%85%98-%ED%8E%B8)
-- [useState, useEffect hooks](https://velog.io/@velopert/react-hooks#1-usestate)
-- [styled-component](https://styled-components.com/docs/basics#getting-started)
+</aside>
