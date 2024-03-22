@@ -1,5 +1,4 @@
-import { React, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
 import GlobalStyle from './GlobalStyle';
 import MainPage from './pages/mainpage/MainPage';
 

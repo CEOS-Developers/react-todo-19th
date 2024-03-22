@@ -15,5 +15,9 @@ const AddButton = ({ onClick }) => {
   background-color: transparent; 
   border: none; 
   cursor: pointer; 
-  padding: 0;
+
+  transition: transform 0.1s ease;
+  &:active {
+    transform: scale(0.9);
+  }
 `;

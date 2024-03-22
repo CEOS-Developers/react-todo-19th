@@ -15,7 +15,10 @@ const StyledButton = styled.button`
     background-color: transparent; 
     border: none; 
     cursor: pointer; 
-    padding: 0;
     margin-right: -5px;
     margin-top: -5px;
+    transition: transform 0.1s ease;
+    &:active {
+        transform: scale(0.9);
+    }
 `;
