@@ -1,15 +1,36 @@
+import { useState } from 'react';
 import styled from 'styled-components';
-import { flexCenter } from 'styles/commonStyle';
+import { flexCenter, flexColumn } from 'styles/commonStyle';
 
 function TodoCreate() {
+  const [inputValue, setInputValue] = useState('');
+  const [isError, setIsError] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!inputValue?.trim()) {
+      setIsError(true);
+      return;
+    }
+
+    if (inputValue) {
+      setIsError(false);
+      setInputValue('');
+    }
+  };
+
+  const handleInputValueChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
   return (
-    <InputForm>
+    <InputForm onSubmit={handleSubmit}>
       <InputContainer>
-        <InputWrapper className="input-wrapper">
-          <input className="input" placeholder="할 일 입력" />
+        <InputWrapper>
+          <input className="input" placeholder="할 일 입력" value={inputValue} onChange={handleInputValueChange} />
           <button className="input-button">입력</button>
         </InputWrapper>
-        <p className="error"></p>
+        <ErrorMessage isError={isError}>할 일을 입력해주세요</ErrorMessage>
       </InputContainer>
     </InputForm>
   );
@@ -25,7 +46,7 @@ const InputForm = styled.form`
 `;
 
 const InputContainer = styled.div`
-  display: flex;
+  ${flexColumn}
   height: 100%;
   gap: 1rem;
 `;
@@ -57,4 +78,12 @@ const InputWrapper = styled.div`
     font-weight: 200;
     border-radius: 1rem;
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  font-size: 1.7rem;
+  margin-left: 0.4rem;
+
+  visibility: ${({ isError }) => (isError ? 'visible' : 'hidden')};
 `;

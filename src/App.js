@@ -1,14 +1,32 @@
 import TodoCreate from 'components/TodoCreate';
 import TodoHeader from 'components/TodoHeader';
 import TodoList from 'components/TodoList';
+import { useState } from 'react';
 import styled from 'styled-components';
+import { flexCenter, flexColumn } from 'styles/commonStyle';
+
+const initialState = {
+  todoList: [],
+  doneList: [],
+};
 
 function App() {
+  // const todoReducer = (state, action) => {
+
+  //   case "Create":
+  //     return {}
+
+  // };
   return (
     <TodoAppLayout>
       <TodoHeader />
-      <TodoCreate />
-      <TodoList />
+      <TodoMain>
+        <TodoCreate />
+        <TodoListContainer>
+          <TodoList listName="Todo" />
+          <TodoList listName="Done" />
+        </TodoListContainer>
+      </TodoMain>
     </TodoAppLayout>
   );
 }
@@ -16,10 +34,19 @@ function App() {
 export default App;
 
 const TodoAppLayout = styled.div`
-  display: flex;
   padding: 4rem 0;
   gap: 2rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  ${flexCenter}
+  ${flexColumn}
+`;
+
+const TodoMain = styled.main`
+  ${flexColumn}
+  gap: 3rem;
+`;
+
+const TodoListContainer = styled.section`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 `;
