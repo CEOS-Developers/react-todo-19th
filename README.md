@@ -1,5 +1,7 @@
 # 2주차 미션: React-Todo
 
+배포 링크 : https://react-todo-19th-zeta.vercel.app/
+
 # 서론
 
 안녕하세요 🙌🏻 19기 프론트엔드 운영진 **변지혜**입니다.
