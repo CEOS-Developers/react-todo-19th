@@ -36,11 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "stylelint": "^11.1.0",
-    "stylelint-config-prettier": "^9.0.5",
-    "stylelint-config-standard": "^36.0.0"
   }
-  
 }
