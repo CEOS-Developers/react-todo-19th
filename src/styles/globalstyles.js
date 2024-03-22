@@ -7,15 +7,23 @@ export const device = {
 
 export const GlobalStyle = createGlobalStyle`
 
+/* 배경색 */
 body{
   background: #f0f6ff;
 }
 
+/* 폰트 */
 @font-face {
   font-family: 'meetme';
   src: url(${MeetmeRegular}) format('woff');
 }
 
+body{
+  font-family: 'meetme';
+}
+
+
+/* reset css */
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -33,7 +41,7 @@ body{
   padding: 0;
   font: inherit;
   color: inherit;
-  font-family: 'meetme';
+ 
 }
 
 html,
@@ -123,7 +131,7 @@ button {
 }
 
 
-
+/* global css */
 html {
   font-size: 62.5%;
 }
@@ -144,6 +152,7 @@ button {
   cursor: pointer;
 }
 
+
 #__next {
   height: 100%;
 }
@@ -157,5 +166,6 @@ button {
 .content {
   flex: 1;
 }
+
 
 `;

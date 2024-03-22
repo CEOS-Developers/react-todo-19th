@@ -5,19 +5,19 @@ import styled from 'styled-components';
 
 function App() {
   return (
-    <TodoAppWrapper>
+    <TodoAppLayout>
       <TodoHeader />
       <TodoCreate />
       <TodoList />
-    </TodoAppWrapper>
+    </TodoAppLayout>
   );
 }
 
 export default App;
 
-const TodoAppWrapper = styled.div`
+const TodoAppLayout = styled.div`
   display: flex;
-  padding: 3rem 0;
+  padding: 4rem 0;
   gap: 2rem;
   flex-direction: column;
   justify-content: center;
