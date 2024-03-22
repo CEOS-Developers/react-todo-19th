@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { flexCenter, flexColumn } from 'styles/commonStyle';
 
-function TodoCreate() {
+function TodoCreate({ addTodo }) {
   const [inputValue, setInputValue] = useState('');
   const [isError, setIsError] = useState(false);
 
@@ -13,10 +13,13 @@ function TodoCreate() {
       return;
     }
 
-    if (inputValue) {
-      setIsError(false);
-      setInputValue('');
-    }
+    addTodo({
+      id: Math.floor(Math.random() * 1000), // 임의의 ID 생성 (실제로는 고유한 ID를 사용해야 함)
+      text: inputValue,
+    });
+
+    setIsError(false);
+    setInputValue('');
   };
 
   const handleInputValueChange = (e) => {
@@ -30,7 +33,7 @@ function TodoCreate() {
           <input className="input" placeholder="할 일 입력" value={inputValue} onChange={handleInputValueChange} />
           <button className="input-button">입력</button>
         </InputWrapper>
-        <ErrorMessage isError={isError}>할 일을 입력해주세요</ErrorMessage>
+        <ErrorMessage $isError={isError}>할 일을 입력해주세요</ErrorMessage>
       </InputContainer>
     </InputForm>
   );

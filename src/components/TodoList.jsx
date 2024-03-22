@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import { flexColumn } from 'styles/commonStyle';
 
-function TodoList({ listName }) {
+function TodoList({ listName, list }) {
   return (
     <TodoListWrapper>
       <h2>
         {listName} <span> / 0개</span>
       </h2>
-      <ul className="list"></ul>
+      <ul className="list">
+        {list.map((li) => (
+          <li key={li.id}>{li.text}</li>
+        ))}
+      </ul>
     </TodoListWrapper>
   );
 }
@@ -29,5 +33,9 @@ const TodoListWrapper = styled.article`
     ${flexColumn}
     gap: 1rem;
     overflow: auto;
+  }
+
+  & {
+    font-size: 2rem;
   }
 `;
