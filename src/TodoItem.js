@@ -16,19 +16,27 @@ const Button = styled.button`
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+    
 
 	&:hover {
 		background-color: #0056b3;
 	}
 `;
 
-function TodoItem({ todo, onDelete }) {
-	return (
-		<ItemContainer>
-			<span>{todo.text}</span>
-			<Button onClick={() => onDelete(todo.id)}>완료</Button>
-		</ItemContainer>
-	);
-}
-
-export default TodoItem;
+//TodoItem 컴포넌트에 완료 상태를 토글하는 기능 추가
+function TodoItem({ todo, onDelete, onToggleCompleted }) {
+    return (
+      <ItemContainer>
+        <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+          {todo.text}
+        </span>
+        <Button onClick={onToggleCompleted}>
+          {todo.completed ? '미완료로 변경' : '완료'}
+        </Button>
+        <Button onClick={onDelete}>삭제</Button>
+      </ItemContainer>
+    );
+  }
+  
+  export default TodoItem;
+  

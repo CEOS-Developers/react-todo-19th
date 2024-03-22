@@ -51,41 +51,42 @@ const DeleteSectionButton = styled(Button)`
 	}
 `;
 
-function Section({ section, onDeleteSection, addTodo, deleteTodo }) {
-	const [todoText, setTodoText] = useState('');
-
-	const handleAddTodo = () => {
-		if (todoText.trim() === '') return; // Prevent adding empty todos
-		addTodo(section.id, todoText);
-		setTodoText('');
-	};
-
-	return (
-		<SectionContainer>
-			<TitleBar>
-				<Title>{section.name}</Title>
-				<DeleteSectionButton onClick={onDeleteSection}>
-					섹션 삭제
-				</DeleteSectionButton>
-			</TitleBar>
-			<div>
-				<Input
-					type='text'
-					placeholder='할 일 추가'
-					value={todoText}
-					onChange={(e) => setTodoText(e.target.value)}
-				/>
-				<Button onClick={handleAddTodo}>추가</Button>
-			</div>
-			{section.todos.map((todo) => (
-				<TodoItem
-					key={todo.id}
-					todo={todo}
-					onDelete={() => deleteTodo(section.id, todo.id)}
-				/>
-			))}
-		</SectionContainer>
-	);
-}
-
-export default Section;
+function Section({ section, onDeleteSection, addTodo, deleteTodo, onToggleCompleted }) {
+    const [todoText, setTodoText] = useState('');
+  
+    const handleAddTodo = () => {
+      if (todoText.trim() === '') return;
+      addTodo(section.id, todoText);
+      setTodoText('');
+    };
+  
+    return (
+      <SectionContainer>
+        <TitleBar>
+          <Title>{section.name}</Title>
+          <DeleteSectionButton onClick={() => onDeleteSection(section.id)}>
+            섹션 삭제
+          </DeleteSectionButton>
+        </TitleBar>
+        <div>
+          <Input
+            type="text"
+            placeholder="할 일 추가"
+            value={todoText}
+            onChange={(e) => setTodoText(e.target.value)}
+          />
+          <Button onClick={handleAddTodo}>추가</Button>
+        </div>
+        {section.todos.map((todo) => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            onDelete={() => deleteTodo(section.id, todo.id)}
+            onToggleCompleted={() => onToggleCompleted(section.id, todo.id)}
+          />
+        ))}
+      </SectionContainer>
+    );
+  }
+  
+  export default Section;

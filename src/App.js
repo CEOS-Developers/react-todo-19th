@@ -36,17 +36,19 @@ const SummaryText = styled.h2`
 	margin-top: 20px;
 `;
 
+const CountText = styled.h4`
+	margin-top: 2px;
+`;
+
 function App() {
 	const [sections, setSections] = useState([]);
 	const [sectionName, setSectionName] = useState('');
 
-	// 로컬 스토리지에서 섹션 데이터 불러오기
 	useEffect(() => {
 		const storedSections = JSON.parse(localStorage.getItem('sections')) || [];
 		setSections(storedSections);
 	}, []);
 
-	// 섹션 또는 할 일이 변경될 때마다 로컬 스토리지 업데이트
 	useEffect(() => {
 		localStorage.setItem('sections', JSON.stringify(sections));
 	}, [sections]);
@@ -74,7 +76,10 @@ function App() {
 				section.id === sectionId
 					? {
 							...section,
-							todos: [...section.todos, { id: Date.now(), text: todoText }],
+							todos: [
+								...section.todos,
+								{ id: Date.now(), text: todoText, completed: false },
+							],
 					  }
 					: section
 			)
@@ -94,13 +99,34 @@ function App() {
 		);
 	};
 
-	// 남은 할 일의 총 개수 계산
-	const remainingTodos = sections.reduce(
-		(acc, section) => acc + section.todos.length,
-		0
+	// toggleTodoCompleted 함수만 추가된 부분을 보여줍니다.
+
+	const toggleTodoCompleted = (sectionId, todoId) => {
+		setSections((prevSections) =>
+			prevSections.map((section) =>
+				section.id === sectionId
+					? {
+							...section,
+							todos: section.todos.map((todo) =>
+								todo.id === todoId
+									? { ...todo, completed: !todo.completed }
+									: todo
+							),
+					  }
+					: section
+			)
+		);
+	};
+
+	// 남은 할 일과 완료된 할 일의 총 개수 계산
+	const [remainingTodos, completedTodos] = sections.reduce(
+		([remaining, completed], section) => [
+			remaining + section.todos.filter((todo) => !todo.completed).length,
+			completed + section.todos.filter((todo) => todo.completed).length,
+		],
+		[0, 0]
 	);
 
-	// 오늘의 날짜 표시
 	const today = new Date().toLocaleDateString('ko-KR', {
 		year: 'numeric',
 		month: 'long',
@@ -111,9 +137,10 @@ function App() {
 	return (
 		<AppContainer>
 			<GlobalStyle />
-			<SummaryText>
-				{today} - 남은 할 일: {remainingTodos}개
-			</SummaryText>
+			<SummaryText>{today} </SummaryText>
+			<CountText>
+				남은 할 일: {remainingTodos}개, 완료된 할 일: {completedTodos}개
+			</CountText>
 			<Input
 				type='text'
 				placeholder='새 섹션 이름'
@@ -128,6 +155,7 @@ function App() {
 					onDeleteSection={() => deleteSection(section.id)}
 					addTodo={addTodo}
 					deleteTodo={deleteTodo}
+					onToggleCompleted={toggleTodoCompleted}
 				/>
 			))}
 		</AppContainer>
