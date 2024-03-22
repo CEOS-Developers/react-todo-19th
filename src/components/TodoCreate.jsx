@@ -61,14 +61,14 @@ const InputContainer = styled.div`
 const InputWrapper = styled.div`
   display: flex;
   height: 100%;
-  gap: 1rem;
+  gap: 2rem;
 
   & {
     font-size: 2.5rem;
   }
 
   .input {
-    width: 40rem;
+    width: 50rem;
     padding: 1rem;
     border-radius: 1rem;
   }
@@ -92,5 +92,5 @@ const ErrorMessage = styled.p`
   font-size: 1.7rem;
   margin-left: 0.4rem;
 
-  visibility: ${({ isError }) => (isError ? 'visible' : 'hidden')};
+  visibility: ${({ $isError }) => ($isError ? 'visible' : 'hidden')};
 `;
