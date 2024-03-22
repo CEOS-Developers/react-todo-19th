@@ -32,7 +32,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 40rem;
+    height: 38rem;
 `
 
 const TodoLists = styled.div`
