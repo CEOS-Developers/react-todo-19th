@@ -22,10 +22,10 @@ const Button = styled.button`
 	padding: 10px 20px;
 	margin: 5px;
 	border-radius: 15px;
-  border:none;
+	border: none;
 	background-color: #f7f7f7;
 	color: black;
-  font-size:20px;
+	font-size: 20px;
 	cursor: pointer;
 
 	&:hover {
@@ -79,6 +79,7 @@ function App() {
 							...section,
 							todos: [
 								...section.todos,
+								// 해당 섹선에 새로운 할 일 객체 생성하는 부분
 								{ id: Date.now(), text: todoText, completed: false },
 							],
 					  }
@@ -136,9 +137,9 @@ function App() {
 	return (
 		<AppContainer>
 			<GlobalStyle />
-			<SummaryText>⏰  {today}</SummaryText>
+			<SummaryText>⏰ {today}</SummaryText>
 			<CountText>
-      ❎ : {remainingTodos}개, ✅ : {completedTodos}개
+				❎ : {remainingTodos}개, ✅ : {completedTodos}개
 			</CountText>
 			<Input
 				type='text'
