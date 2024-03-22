@@ -1,68 +1,139 @@
 # 2주차 미션: React-Todo
 
-# 서론
+## 🐻 배포 링크
 
-안녕하세요 🙌🏻 19기 프론트엔드 운영진 **변지혜**입니다.
+https://agijagi-todo-react.vercel.app/
 
-다들 1주차 미션 Vanilla Todo 만드시느라 수고 많으셨습니다! 1주차 미션을 통해 여러분들께서 본격적인 React 사용에 앞서 Vanilla JS로 SPA를 만들때의 불편한 점을 느끼셨을 것 이라 생각합니다.
+## 👩‍💻 구현 기능
 
-그리하여 이번 미션은, 1주차 스터의 미션으로 주어진 Todo list 만들기를 **React**로 리팩토링하는 것 입니다!
-기존에 리액트를 잘 아시던 분들께는, 조금 더 효울적인 디자인 패턴에 대해 고민할수 있는 주차가 될 것이고, 리액트를 제대로 접해보지 못하신 분들께는 기존의 어플리케이션을 리액트로 포팅하는 과정을 통해 왜 프론트엔드 시장에 리액트가 등장하게 되었고, 리액트에서 사용하는 여러가지 방식들이 왜 바닐라에 비해 효율적인지 꺠닫는 주차가 될 것이라 생각합니다.
+### 기본 기능
 
-비교적 가벼운 미션인 만큼 코드를 짜는 데 있어 여러분의 **창의성**을 충분히 발휘해보시기 바랍니다. _❕작동하기만 하면 되는 것보다 같은 코드를 짜는 여러가지 방식과 패턴에 대해 많이 고민해보시고, 본인이 작성할 수 있는 가장 창의적인 방법으로 코드를 작성해주셨으면 합니다.❕_ 여러분이 미션 수행을 하는 과정에서 한 생각과 고민만큼 스터디에서 더 많은 것을 얻어가실 수 있을 거라 기대합니다!
+- 할 일 추가, 완료, 삭제
+- Progress Bar로 할 일 완료 현황 확인
+- 오늘 날짜 세팅
+- Local Storage를 이용하여 기존 데이터 불러오기
 
-막히는 부분이 있더라도 우선 스스로 공부하고 찾아보면서 미션을 진행하는 방식을 권고드리지만, 미션과 관련하여 운영진의 도움이 필요하시다면 얼마든지 슬랙 Q&A 채널이나 프론트엔드 카톡방에 질문을 남겨 주세요!
+### 추가 기능
 
-# 미션
+- 할 일 모두 완료/미완료에 따른 Progess Bar 텍스트 동적 업데이트
+- 오늘 날짜에 요일 추가
 
-## 예시
+## 🛠️ 이전과 달라진 부분
 
-- [리액트 투두 예시](https://react-todo-18th-lemon.vercel.app/)
+- 이전에는 할 일 content가 중복되면 아예 추가하지 못하게 했었는데(할 일을 삭제할 때 content 기준으로 삭제했기 때문) 이번 React 과제에서는 할 일을 추가할 때마다 "현재 시간 + 난수"를 통한 고유의 id 값을 해당 할 일에 부여하여 content가 종복되어도 추가할 수 있고, 같은 content를 가진 할 일이라도 각각 구분할 수 있게 수정하였습니다.
+- 이전과 달리 todoList와 doneList를 구분하지 않고 하나의 객체 배열 데이터로 관리하도록 수정하였다. 객체의 "isDone" 프로퍼티로 todo와 done을 구별할 수 있도록 하였습니다.
 
-## 미션 목표
+## 🥳 후기
 
-- VSCode, Prettier를 이용하여 개발환경을 관리합니다.
-- React의 기초를 이해합니다.
-- React를 통한 어플리케이션 상태 관리 방법을 이해합니다.
-- React Hooks에 대한 기초를 이해합니다.
-- Styled-Components를 통한 CSS-in-JS 및 CSS Preprocessor의 사용법을 익힙니다.
+React로 하니까 진짜 편하고 좋네요.. Vanilla JS로 구현했을 때 보기 불편했던 부분이 해결돼서 정말 기쁩니다~~🥰
 
-## 기한
+## 🔥 어려웠던 부분 / 의문점
 
-- 2024년 3월 22일 금요일
+- 컴포넌트 분리
+  - 현재는 Header, Main 크게 2개의 컴포넌트로 구분하고, Main 내에서는 개별 Todo Item 컴포넌트만 따로 분리하였습니다.
+  - 그런데 Main 한 곳에 Input란, Progress Bar, Todo/Done을 보여주는 부분이 다 들어있다 보니, Main 컴포넌트가 return하는 것이 너무 많다는 생각이 들었습니다.
+  - 그래서 [커밋 내역](https://github.com/CSE-pebble/react-todo-19th/commit/bee3517b5eec7632808ae816cad25475afaadf68)을 보시면 Progress Bar를 따로 컴포넌트로 분리하려는 시도를 했으나... 이 컴포넌트를 분리해도 재사용할 일이 없고(아무래도 프로젝트 규모가 매우 작다보니) 오히려 분리함으로써 쓸데없이 props만 전달하게 되었다고 판단하여 다시 원래대로 돌려놓았습니다.
+  - 다른 분들은 언제, 무슨 기준으로 컴포넌트를 분리하시는지 스터디 세션 때 이야기 나눠보고 싶습니다!
+- 상태 변경 관련: 화면에 "todo / done 개수"를 보여줄 때 `todoCount`, `doneCount` 변수를 이용했습니다. 처음에는 doneCount랑 totalCount가 업데이트 될 때마다 화면이 리렌더링 되려면 `doneCount`, `totalCount`를 `useState`로 관리해야 한다고 생각했습니다. 그러나 둘 다 일반 변수로 선언했음에도 리렌더링이 정상적으로 잘 동작하였습니다😮 왜 이런 현상이 발생한 것일까요?
 
-## Key Questions
+  > 상태(State)의 변경은 React 컴포넌트의 리렌더링을 일으키는 주요 원인 중 하나이며, 이에 따라 상태와 **상태에 의존하는 값**들이 변경될 때마다 컴포넌트가 새로 그려지게 됩니다.
 
-- Virtual-DOM은 무엇이고, 이를 사용함으로서 얻는 이점은 무엇인가요?
-- 미션을 진행하면서 느낀, React를 사용함으로서 얻을수 있는 장점은 무엇이었나요?
-- React에서 상태란 무엇이고 어떻게 관리할 수 있을까요?
-- Styled-Components 사용 후기 (CSS와 비교)
+  `doneCount`, `totalCount` 모두 `useState`로 관리되는 "`data`"에 의존하는 변수이기 때문에 `data`의 상태가 변경될 때마다 컴포넌트가 리렌더링 되고, 그에 따라 `doneCount`, `totalCount`도 업데이트된 상태로 화면에 보여지는 것입니다.
 
-## 필수 요건
+* 삽질 n시간 하기.
 
-- 1주차 미션의 결과물을 그대로 React로 구현합니다. (‼️ todo / done 개수 잊지 마세요 ‼️)
-- Functional Components를 사용합니다.
-- React Hooks만을 사용해 상태를 관리합니다.
-- (이번주는 Redux, MobX, Recoil, SWR등의 외부 상태관리 라이브러리를 사용하지 않아도 미션 수행에 지장이 없습니다.)
+  - Vite 프로젝트는 Vercel로 배포할 때 종종 오류가 나는 것 같습니다.. 덕분에 삽질 n시간~..
 
-## 선택 요건
+  - 어쩌다 그렇게 된건지 모르겠지만 본 레포지토리 & fork 해온 레포지토리의 master 브랜치와, 제 계정명으로 판 브랜치가 커밋 내역이 아예 달라서(master 브랜치의 커밋 내역이 보이지 않았음) PR이 안됐습니다.. 덕분에 여기서도 삽질 n시간~..
 
-- 기존 Todo-list에 여러분들이 추가하고 싶은 기능과 디자인을 자유롭게 추가해보세요.
+  - 배포했을 때까지만 해도 배포 해놓고 여유롭게 추가적인 기능을 구현하려고 했는데 쓸데없는 삽질 때문에 못한게 너무 아쉬워요ㅠㅠ 하
 
-## 로컬 실행방법
+## ✨ 더 구현해보고 싶은 기능
 
----
+- 모바일 화면 반응형
+- CSS 단위: 반응형 CSS 단위에 대한 공부가 좀 더 필요할 것 같습니다.🥲 px 대신 rem을 적극적으로 활용해보고 싶어요!
+- form 태그 이용: form 태그가 웹사이트에서 회원가입이나 로그인, 검색창과 같은 사용자 정보 데이터를 입력 받아 서버로 전송할 때 사용한다는 것은 알고 있는데, 어떻게 사용해야 할지 확실히 모르겠어서 form 태그 없이 기능을 구현했습니다. 효율적인 데이터 전송에 도움이 되는 것 같아 이용해보고 싶습니다!
 
-`npm start` : 로컬에서 react application을 자동으로 리로드하여 실행시켜줍니다.
+## ❓ Key Questions
 
-# 링크 및 참고자료
+### 1. Virtual-DOM은 무엇이고, 이를 사용함으로서 얻는 이점은 무엇인가요?
 
----
+Virtual은 말 그대로 가상이라는 뜻이고, React에서는 이 Virtual DOM을 통해 리렌더링 한다.
 
-- [create react app (CRA)](https://create-react-app.dev/docs/getting-started/)
-- [리액트 docs 주요 개념 1-12](https://react.dev/learn)
-- [리액트 docs Hook 1-3](https://react.dev/reference/react)
-- [리액트 useEffect 완벽 가이드](https://overreacted.io/ko/a-complete-guide-to-useeffect/)
-- [컴포넌트 네이밍을 위한 자바스크립트 네이밍 컨벤션](https://velog.io/@cada/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8A%A4%ED%83%80%EC%9D%BC-%EA%B0%80%EC%9D%B4%EB%93%9C-%EB%84%A4%EC%9D%B4%EB%B0%8D-%EC%BB%A8%EB%B2%A4%EC%85%98-%ED%8E%B8)
-- [useState, useEffect hooks](https://velog.io/@velopert/react-hooks#1-usestate)
-- [styled-component](https://styled-components.com/docs/basics#getting-started)
+> Virtual DOM이란, DOM을 추상화한 가상의 DOM을 메모리에 만들어 놓은 것이다. Virtual DOM을 이용한다는 것은, 변경사항이 생겼을 때 직접 DOM을 수정함으로써 리렌더링 시키는 것(Vanilla JS 방식)이 아니라, Virtual DOm과 Real DOM과의 비교를 통해 리렌더링 시킨다.
+
+![Virtual DOM vs. Browser DOM](https://blog.kakaocdn.net/dn/dyNYlQ/btqE5eZ1q9g/4kaWQgKPNBrKNJxjHCOHAk/img.png)
+
+그런데 왜 Virtual DOM을 사용해야 할까?
+
+먼저 React에서 언제 리렌더링이 일어나는지부터 알아보자.
+
+> React는 다음과 같은 경우에 리렌더링이 일어난다.<br/>
+>
+> 1. Props가 변경되었을 때
+> 2. State가 변경되었을 때
+> 3. forceUpdate()를 실행하였을 때
+> 4. 부모 컴포넌트가 렌더링 되었을 때
+
+기존 Vanilla JavaScript 개발은 DOM 요소를 하나하나 가지고 와서, 하나가 변경되면 하나를 업데이트 해주는 방식이었다. 즉, 100개의 요소에 업데이트가 발생하면, 100번 리렌더링 되는 방식이었다. 즉, DOM 조작 비용이 컸다. 최근에 웹은 DOM과의 상호작용이 많기 때문에 더욱 심각한 문제이다.
+
+하지만, Virtual DOM은 메모리에서 Virtual DOM과 Real DOM을 비교하는 과정을 거치기 때문에, 현저히 빠른 연산을 수행하고, 변경사항을 한번에 모아서(버퍼링) 감지하여 리렌더링 시키기 때문에 연산 횟수를 최소화하여 효율적이다. 위의 경우라면 100번의 리렌더링을 Virtual DOM에 모두 반영하고, Real DOM과 1회 비교하여 연산을 수행하고 리렌더링한다.
+
+### 2. 미션을 진행하면서 느낀, React를 사용함으로서 얻을수 있는 장점은 무엇이었나요?
+
+1. `Component-based Development`가 가능하여, 재사용성이 높고, 효율적인 유지보수가 가능하다.
+
+   기존에는 하나의 `index.html` 파일에 한 페이지에 있는 모든 UI 요소를 넣어서 개발했지만, 리액트는 UI를 컴포넌트 단위로 나누어서 개발한다.
+
+2. Virtual DOM을 통해 리렌더링을 효율적으로 수행하도록 도와준다.
+
+3. SPA(Single Page Application)이기 때문에 사용자 경험과 성능을 향상시키는데 도움이 된다.
+
+   > **SPA(Single Page Application)**: 페이지는 하나인데, 안에 있는 컴포넌트가 변화한다.
+   > **MPA(Multiple Page Application)**: 페이지가 여러 개라서, 페이지로의 이동은 새로운 페이지를 의미한다.
+
+   ![SPA vs. MPA](https://eww-wp.s3.ap-south-1.amazonaws.com/wp-content/uploads/2020/02/13142441/single-page-web-apps.jpg)
+
+   Vanilla JS(MPA)라면 페이지가 여러개로 구성되어 있다. `A.html`, `B.html`, `C.html`... 각 html의 이동은, 새로운 페이지로의 이동을 의미하고, 새로운 페이지로 갈 때마다 서버에서 리소스(`html`, `css`, `js` 등)를 로드하고 실행한다.
+
+   하지만 규모가 커지고 사용자와의 상호작용이 많아짐에 따라, 매번 서버에서 리소스를 로드하는 것은 과부하로 인한 속도 저하가 발생하기에 문제점으로 지적되었다.
+
+   SPA는 이를 해결하기 위한 방법으로, 첫 페이지에서 필요한 리소스 파일을 모두 로드하고, 페이지가 이동함에 따라 리소스를 실행하며 보여준다. 즉, 뷰 렌더링을 서버가 아닌 웹 브라우저가 담당한다. 즉, Vanilla JS에서는 페이지가 여러개인데 반해, React에서는 하나의 페이지에, 다양한 뷰를 보여준다. (React에서는 html 파일이 `index.html` 파일 하나밖에 없다. 하나의 페이지에서 다른 컴포넌트들을 보여주는 방식이다.)
+
+4. JSX 문법을 사용하여 UI를 작성하므로 가독성이 뛰어나며, 코드의 유지보수성을 높여준다.
+
+   > JSX: JavaScript 코드를 HTML처럼 사용하여 View를 직관적으로 파악할 수 있게 하는 문법
+
+5. One-way Data Flow(단방향 데이터 흐름)을 강조하기 때문에 일관적인 데이터 관리가 가능하다.
+
+   단방향 데이터 흐름은 부모에서 자식으로만 데이터 전달이 가능하다.
+
+   양방향 데이터 흐름은 부모 → 자식 / 자식 → 부모 모두 데이터를 보내줄 수 있는 흐름이다. 이 흐름은 작은 프로젝트에서는 간단히 사용할 수 있다는 장점이 있지만, 프로젝트가 거대해질수록 더욱 복잡해지고, 어디서 어떤 데이터를 받아왔는지 소재 파악이 어렵다. 그러므로, 디버깅과 코드를 이해하기 어려워지고, 예측하기 어려운 코드가 된다.
+
+   그러므로 React는 보다 일관된 데이터 관리를 위해 단방향 데이터 흐름을 채택했다.
+
+React로 코드를 작성하며 직접적으로 느낀 장점은 1, 4번입니다.
+
+### 3. React에서 상태란 무엇이고 어떻게 관리할 수 있을까요?
+
+상태(state)는 동적 데이터를 다루는 방식으로서, 뷰에 렌더링 돼야 하는 컴포넌트의 데이터를 저장하는 데 사용한다. 이 상태(state)는 `useState` Hook을 통해서 관리할 수 있다. state는 변경이 가능하고, `setState`를 통해 변경한다.
+
+왜 변수를 사용하지 않고, state를 사용할까? 이는 React의 Rendering 방식에 주목할 필요가 있다.
+
+> React의 Component Rendering(화면을 수정하는) 기준은 state의 변화이다. 오직 state가 변화할 때만, 화면을 update 시켜준다.
+
+### 4. Styled-Components 사용 후기 (CSS와 비교)
+
+일반 CSS의 단점은 아래와 같다.
+
+- `CSS`와 `JS` 파일이 분리되어 있어, 동적 스타일링이 어렵다.
+- class 이름 중복 가능성이 있다. `CSS`로 분리하여 작성한다고 하더라도, 웹팩에서 빌드하게 될 때 하나의 파일로 합쳐지게 되면 class가 전역에서 작동하게 된다. 그러므로, 중복을 피하는 노력을 기울여야 한다.
+
+반면 styled-components의 특성 및 장점은 아래와 같다.
+
+- `CSS`가 `JS`에 들어가 있기 때문에, 동적 스타일링이 간단하다.
+- No-class coding: 구현 시 클래스명이 임의로 부여된다.
+
+## 🔗 참고 자료
+
+- [Vite 프로젝트 Vercel 배포하기](https://velog.io/@j2yn34/ReactTypescriptVite-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-Vercel-%EB%B0%B0%ED%8F%AC)
