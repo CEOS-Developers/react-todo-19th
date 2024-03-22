@@ -3,18 +3,25 @@ import styled from 'styled-components'
 import dayjs from 'dayjs'
 
 const TodoInputFieldWrapper = styled.form`
-    height: 2.5rem;
+    height: 3.9rem;
+    width: 90%;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    margin: 0 auto;
     border-bottom: 0.1rem solid #968E8E;
 `
 const InputField = styled.input`
     border: none;
-   flex-grow: 1;
+    padding: 0;
+    flex-grow: 1;
     color: black;
     font-size: 1.3rem;
     font-weight: normal;
+    &::placeholder{
+    color: black;
+    font-size: 1.3rem;
+    font-weight: normal;
+    }
 `
 const SubmitButton = styled.button`
     border: none;
@@ -40,7 +47,6 @@ const onSubmit = (e) => {
     if(!value.trim()){
         alert('할일을 입력 해 주세요')
     }
-    console.log(value);
     getList(value);
     setValue("");
 }

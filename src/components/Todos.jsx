@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import Date from './Date';
 import styled from 'styled-components';
+import {css} from 'styled-components';
 import TodoInputField from './Lists/TodoInputField';
 import { useState } from 'react';
 import ListsItems from './Lists/ListsItems';
 //전체 틀 잡기
 const TodoContainer = styled.div`
-    background-color: aliceblue;
     display: flex;
     flex-direction: column;
     width: 70vw;
@@ -20,25 +20,47 @@ const TodoContainer = styled.div`
 `
 
 //list가 표시되는 하단부
+export const textCenter = css`
+    width: 90%;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: normal;
+`
+
 const Wrapper = styled.div`
-    background-color: antiquewhite;
     display: flex;
     flex-direction: row;
+    width: 100%;
+    height: 40rem;
 `
+
 const TodoLists = styled.div`
-    background-color: beige;
     display: flex;
     flex-direction: column;
     width:50%;
 `
 const DoneLists = styled.div`
-    background-color: beige;
     display: flex;
     flex-direction: column;
     width:50%;
+    h4{
+     ${textCenter}
+     color: black;
+     margin: 0 auto;
+     height: 4.5rem;
+    }
+`
+
+const ListsWrapper = styled.div`
+    flex-grow: 1;
+    overflow: scroll;
 `
 const ListsCount = styled.div`
-    
+   ${textCenter}
+   color: #968E8E;
+   justify-content: center;
+   margin-top: 0.9rem;
 `
 
 export default function Todos() {
@@ -63,8 +85,8 @@ const toggleTodo = (id) => {
   };
 
 
-  const todoCount = lists.filter((data) => !data.completed).length;
-  const doneCount = lists.filter((data) => data.completed).length;
+const todoCount = lists.filter((data) => !data.completed).length;
+const doneCount = lists.filter((data) => data.completed).length;
   
   
   return (
@@ -78,6 +100,7 @@ const toggleTodo = (id) => {
              setLists={setLists}
              setValue={setValue}
             />
+           <ListsWrapper>
             {lists.map((data)=>
             data.completed ? <></>:
             <ListsItems
@@ -88,12 +111,13 @@ const toggleTodo = (id) => {
             deleteTodo = {deleteTodo}
             />
             )}
-             
+            </ListsWrapper>
             <ListsCount>{todoCount} lists are left</ListsCount>
         </TodoLists>
        
         <DoneLists>
             <h4>Done</h4>
+            <ListsWrapper>
             {lists.map((data)=>
             data.completed ? 
             <ListsItems
@@ -104,7 +128,7 @@ const toggleTodo = (id) => {
             deleteTodo = {deleteTodo}
             /> : <></>
             )}
-            
+            </ListsWrapper>
             <ListsCount>{doneCount} lists are done! way to go : )</ListsCount>
         </DoneLists>
         </Wrapper>
