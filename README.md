@@ -1,5 +1,7 @@
 # 2주차 미션: React-Todo
 
+배포링크: https://react-todo-19th-oifd.vercel.app/
+
 # 기능 정리
 
 1. 할일 추가시 새로 추가된 할일 부분으로 스크롤 이동
