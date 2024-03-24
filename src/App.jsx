@@ -17,8 +17,11 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem('todoList', JSON.stringify(todoList));
-    localStorage.setItem('doneList', JSON.stringify(doneList));
   }, [todoList]);
+
+  useEffect(() => {
+    localStorage.setItem('doneList', JSON.stringify(doneList));
+  }, [doneList]);
 
   return (
     <TodoAppLayout>

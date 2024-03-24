@@ -46,7 +46,6 @@ function TodoCreate({ dispatch }) {
 export default TodoCreate;
 
 const InputForm = styled.form`
-  display: flex;
   width: 100%;
   height: 6rem;
   ${flexCenter}

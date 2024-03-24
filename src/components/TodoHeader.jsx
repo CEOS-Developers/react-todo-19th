@@ -7,7 +7,7 @@ function TodoHeader() {
 
   // 사용자 이름 설정
   const showUserName = () => {
-    if (!userName) {
+    if (!userName || userName == 'null') {
       const nameInput = prompt('이름을 알려주세요!');
       localStorage.setItem('userName', nameInput);
       setUserName(nameInput);
@@ -16,13 +16,13 @@ function TodoHeader() {
 
   useEffect(() => {
     showUserName();
-  });
+  }, []);
 
   return (
     <HeaderWrapper>
       <p>{getTodayDate()}</p>
       <h1>
-        <span>{userName}이의 </span>TODO-LIST
+        <span> {userName && `${userName}이의`} </span>TODO-LIST
       </h1>
     </HeaderWrapper>
   );
