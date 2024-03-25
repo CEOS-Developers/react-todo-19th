@@ -1,7 +1,13 @@
+import React from "react";
+import GlobalStyle from './GlobalStyle';
+import MainPage from './pages/mainpage/MainPage';
+
 function App() {
   return (
     <div className="App">
-      <h1>CEOS 19기 프론트엔드 파이팅!( ¨̮ )و✧🔥</h1>
+      <GlobalStyle /> 
+      <MainPage />
+
     </div>
   );
 }
