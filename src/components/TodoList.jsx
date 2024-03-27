@@ -6,13 +6,13 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 
 function TodoList({ listName, list, dispatch }) {
   const handleListItemClick = ({ id, text }) => {
-    const actionType = listName === 'todo' ? 'MOVE_TODO_TO_DONE' : 'MOVE_DONE_TO_TODO';
+    const actionType = listName === 'Todo' ? 'MOVE_TODO_TO_DONE' : 'MOVE_DONE_TO_TODO';
     dispatch({ type: actionType, payload: { id, text } });
   };
 
   const handleDeleteItem = (e, { id, text }) => {
     e.stopPropagation();
-    const actionType = listName === 'todo' ? 'REMOVE_TODO' : 'REMOVE_DONE';
+    const actionType = listName === 'Todo' ? 'REMOVE_TODO' : 'REMOVE_DONE';
     dispatch({ type: actionType, payload: { id, text } });
   };
 
@@ -24,8 +24,8 @@ function TodoList({ listName, list, dispatch }) {
       <TodoListContainer>
         {list.map((li) => (
           <TodoListItem key={li.id} onClick={() => handleListItemClick(li)}>
-            {listName == 'todo' ? <FaRegCircle /> : <FaRegCheckCircle />}
-            {li.text}
+            {listName == 'Todo' ? <FaRegCircle /> : <FaRegCheckCircle />}
+            <p>{li.text}</p>
             <FaRegTrashAlt className="trash-icon" onClick={(e) => handleDeleteItem(e, li)} />
           </TodoListItem>
         ))}
@@ -60,6 +60,7 @@ const TodoListContainer = styled.ul`
 
 const TodoListItem = styled.li`
   display: flex;
+
   ${flexCenter}
   gap: 1rem;
   cursor: pointer;
@@ -68,5 +69,9 @@ const TodoListItem = styled.li`
   }
   &:hover .trash-icon {
     visibility: visible;
+  }
+
+  & p {
+    max-width: 50%;
   }
 `;

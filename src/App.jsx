@@ -29,8 +29,8 @@ function App() {
       <TodoMain>
         <TodoCreate list={todoList} dispatch={dispatch} />
         <TodoListContainer>
-          <TodoList listName="todo" list={todoList} dispatch={dispatch} />
-          <TodoList listName="done" list={doneList} dispatch={dispatch} />
+          <TodoList listName="Todo" list={todoList} dispatch={dispatch} />
+          <TodoList listName="Done" list={doneList} dispatch={dispatch} />
         </TodoListContainer>
       </TodoMain>
     </TodoAppLayout>
